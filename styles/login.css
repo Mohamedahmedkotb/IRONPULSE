@@ -1,20 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .main{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly
 }
-.text{
-    justify-content: ;
-
 .text1{
 font-size: x-large;
 font-weight: bolder;
-margin: 0px;
-}
-.text2{
-    
-}
-
-
 }
