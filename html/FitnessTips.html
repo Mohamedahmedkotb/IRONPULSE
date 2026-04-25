@@ -3,91 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tips</title>
     <link rel="stylesheet" href="../styles/FitnessTips.css">
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="logo">FitTrack Pro</div>
-        <nav>
-            <a href="#" class="active">Dashboard</a>
-            <a href="#" class="active">Workouts</a>
-            <a href="#" class="active">Nutrition</a>
-            <a href="#" class="active">Community</a>
-            <a href="#" class="active">Settings</a>
-        </nav>
-        <div class="nav-right">
-            <input type="text" placeholder="Search tips..." class="search-bar">
-            <button class="btn-go-pro">Go Pro</button>
-            <div class="profile-pic"></div>
-        </div>
-    </header>
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="logo">FitTrack Pro</div>
 
-    <main class="container">
-        <section class="page-header">
-            <div>
-                <h1>Fitness Tips</h1>
-                <p>Expert advice to elevate your performance.</p>
+    <nav>
+        <a href="#">Dashboard</a>
+        <a href="#">Workouts</a>
+        <a href="#">Nutrition</a>
+        <a href="#" class="active">Community</a>
+        <a href="#">Settings</a>
+    </nav>
+
+    <div class="nav-right">
+        <input type="text" placeholder="Search tips..." class="search-bar">
+        <button class="btn-go-pro">Go Pro</button>
+        <div class="profile-pic"></div>
+    </div>
+</header>
+
+<!-- MAIN -->
+<main class="container">
+
+    <section class="page-header">
+        <div>
+            <h1>Fitness Tips</h1>
+            <p>Expert advice to elevate your performance.</p>
+        </div>
+
+        <input type="text" placeholder="Search articles..." class="main-search">
+    </section>
+
+    <!-- FILTERS -->
+    <div class="filters">
+        <button class="filter-btn active">All Tips</button>
+        <button class="filter-btn">Strength</button>
+        <button class="filter-btn">Endurance</button>
+        <button class="filter-btn">Nutrition</button>
+        <button class="filter-btn">Recovery</button>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero-card">
+        <img class="hero-img" src="../assets/media/6e6ad3a1-68ac-423f-b9ae-4f34adc3c127.jpg" alt="Hero">
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <span class="badge">MASTERCLASS</span>
+            <h2>The Perfect Deadlift Form: A Kinetic Breakdown</h2>
+            <p>
+                Master the mechanics of the king of all exercises to maximize power output and minimize injury risk.
+            </p>
+            <button class="btn-primary">Read Article →</button>
+        </div>
+    </section>
+
+    <!-- CARDS -->
+    <section class="article-grid">
+
+        <article class="card">
+            <img src="../assets/media/e6fdd6dc-ac39-4854-9064-dd060dbe12d4.jpg" alt="">
+            <div class="card-body">
+                <span class="card-badge">Nutrition</span>
+                <h3>Macro Cycling for Peak Performance</h3>
+                <p>How adjusting your carbohydrate intake based on training intensity can optimize recovery.</p>
+                <span class="read-time">🕒 5 MIN READ</span>
             </div>
-            <input type="text" placeholder="Search articles, workouts..." class="main-search">
-        </section>
+        </article>
 
-        <div class="filters">
-            <button class="filter-btn active">All Tips</button>
-            <button class="filter-btn active">Strength</button>
-            <button class="filter-btn active">Endurance</button>
-            <button class="filter-btn active">Nutrition</button>
-            <button class="filter-btn active">Recovery</button>
-        </div>
-
-        <section class="hero-card">
-            <div class="hero-content">
-                <span class="badge">MASTERCLASS</span>
-                <h2>The Perfect Deadlift Form: A Kinetic Breakdown</h2>
-                <p>Master the mechanics of the king of all exercises to maximize power output and minimize injury risk.</p>
-                <button class="btn-primary">Read Article &rarr;</button>
+        <article class="card">
+            <img src="../assets/media/0f8967fd-3116-426f-9100-812443f27371.jpg" alt="">
+            <div class="card-body">
+                <span class="card-badge">Recovery</span>
+                <h3>Active Recovery Protocols</h3>
+                <p>Why completely resting might be slowing down your progress.</p>
+                <span class="read-time">🕒 4 MIN READ</span>
             </div>
-        </section>
+        </article>
 
-        <section class="article-grid">
-            <article class="card">
-                <div class="card-img nutrition-img"></div>
-                <div class="card-body">
-                    <span class="card-badge nutrition">Nutrition</span>
-                    <h3>Macro Cycling for Peak Performance</h3>
-                    <p>How adjusting your carbohydrate intake based on training intensity can optimize recovery.</p>
-                    <span class="read-time">🕒 5 MIN READ</span>
-                </div>
-            </article>
+        <article class="card">
+            <img src="../assets/media/db2f2f7e-4040-4d7c-81fb-6420b27c111b.jpg" alt="">
+            <div class="card-body">
+                <span class="card-badge">Endurance</span>
+                <h3>Zone 2 Training Unlocked</h3>
+                <p>Building an unbreakable aerobic base without burning out your system.</p>
+                <span class="read-time">🕒 7 MIN READ</span>
+            </div>
+        </article>
 
-            <article class="card">
-                <div class="card-img recovery-img"></div>
-                <div class="card-body">
-                    <span class="card-badge recovery">Recovery</span>
-                    <h3>Active Recovery Protocols</h3>
-                    <p>Why completely resting might be slowing down your progress. Implementing low-intensity work.</p>
-                    <span class="read-time">🕒 4 MIN READ</span>
-                </div>
-            </article>
+    </section>
 
-            <article class="card">
-                <div class="card-img endurance-img"></div>
-                <div class="card-body">
-                    <span class="card-badge endurance">Endurance</span>
-                    <h3>Zone 2 Training Unlocked</h3>
-                    <p>Building an unbreakable aerobic base without burning out your central nervous system.</p>
-                    <span class="read-time">🕒 7 MIN READ</span>
-                </div>
-            </article>
-        </section>
-    </main>
+</main>
 
-    <footer>
-        <p>&copy; 2026 FITTRACK PRO. KINETIC PRECISION PERFORMANCE.</p>
-        <div class="footer-links">
-            <a href="#">PRIVACY</a> <a href="#">TERMS</a> <a href="#">SUPPORT</a> <a href="#">API</a>
-        </div>
-    </footer>
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 FITTRACK PRO</p>
+</footer>
 
 </body>
 </html>
