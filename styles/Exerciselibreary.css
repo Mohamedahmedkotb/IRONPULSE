@@ -135,8 +135,6 @@ transition: all .2s;
 .bodyweight {
 background:#ffffff ;
 border:1px none #e2e6f0 ;
-display: flex;
-flex-direction: column;
 cursor: pointer;
 }
 .Bench-press:hover,
@@ -174,6 +172,7 @@ display: flex;
 font-size:small ;
 gap: 8px;
 flex-wrap: wrap;
+margin: 20px;
 }
 .tag{
  padding: 4px 11px;
@@ -194,14 +193,41 @@ border: 1px solid #e2e6f0;
  font-size: medium;
  margin-top: 80px;
 
+}
+.btn-load-more{
+color: #1843ed;
+background-color:#ffffff ;
+border: 1px solid #1843ed;
+cursor: pointer;
+width: 10%;
+height: 4vh;
+border-radius: 10px;
+font-weight: 700;
+}
+.btn:hover{
+transform: translateY(-5px);
+ box-shadow: 0 8px 32px rgba(37,99,235,.13), 0 2px 8px rgba(15,20,60,.08);
+border-color: #ffff;
 
 }
-/* .btn-load-more{
-display:flex;
-justify-content: center;
 
+.btn-load-more:active { transform: translateY(0); }
 
-
-
-} */
-
+.Bench-press { animation: fadeUp .5s .15s ease both; }
+.squats      { animation: fadeUp .5s .25s ease both; }
+.bodyweight  { animation: fadeUp .5s .35s ease both; }
+@media (max-width: 600px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+  .addexercise {
+    grid-column: 1;
+    grid-row: 2;
+    margin-bottom: 24px;
+  }
+  .form { grid-row: 3; }
+ 
+  .Exercises {
+    grid-template-columns: 1fr;
+  }
+}
