@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTrack Pro - Nutrition Plan</title>
+    <link rel="stylesheet" href="../styles/mealplans.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 18h12M6 6h12M2 12h20M4 12v-2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2M4 12v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
+            </svg>
+            FitTrack Pro
+        </div>
+        <div class="nav-links">
+            <a href="#">Dashboard</a>
+            <a href="#">Workouts</a>
+            <a href="#" class="active">Nutrition</a>
+            <a href="#">Community</a>
+            <a href="#">Settings</a>
+        </div>
+        <div class="nav-actions">
+            <button class="btn-pro">Go Pro</button>
+            <img src="../assets/media/02e365b6-a962-484a-b83a-bfc51fd522d5.png" alt="Avatar" class="avatar">
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- HEADER -->
+        <header class="page-header">
+            <div class="header-titles fade-in-up">
+                <h1>Nutrition Plan</h1>
+                <p>Your personalized fuel strategy.</p>
+            </div>
+            <div class="goal-toggle fade-in-up" style="animation-delay: 0.1s">
+                <button class="toggle-btn active">Muscle Gain</button>
+                <button class="toggle-btn">Fat Loss</button>
+                <button class="toggle-btn">Maintenance</button>
+            </div>
+        </header>
+
+        <!-- TOP WIDGETS ROW -->
+        <div class="widgets-row">
+            <!-- Daily Target -->
+            <div class="card daily-target fade-in-up" style="animation-delay: 0.2s">
+                <div class="icon-circle top-right blue-light">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c-2.28 0-3-2-3-4a6 6 0 0 1 8-2 6 6 0 0 1-5.5 8c2.28 0 3 2 3 4a2.5 2.5 0 0 1-5 0"></path><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M22 12h-2"></path><path d="M4 12H2"></path><path d="M19.07 4.93l-1.41 1.41"></path><path d="M6.34 17.66l-1.41 1.41"></path><path d="M19.07 19.07l-1.41-1.41"></path><path d="M6.34 6.34l-1.41-1.41"></path></svg>
+                </div>
+                <div class="card-content-center">
+                    <p class="eyebrow">DAILY TARGET</p>
+                    <h2 class="target-value"><span id="target-counter">3,250</span></h2>
+                    <p class="unit">kcal</p>
+                </div>
+            </div>
+
+            <!-- Macro Split -->
+            <div class="card macro-split fade-in-up" style="animation-delay: 0.3s">
+                <div class="card-header">
+                    <h3>Macro Split</h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-muted"><circle cx="12" cy="12" r="10"></circle><path d="M12 2v20"></path><path d="M12 12h10"></path></svg>
+                </div>
+                
+                <div class="macro-list">
+                    <!-- Protein -->
+                    <div class="macro-item">
+                        <div class="macro-labels">
+                            <span class="macro-name">Protein</span>
+                            <span class="macro-stats">200g <span class="divider">/</span> <strong class="text-blue">40%</strong></span>
+                        </div>
+                        <div class="progress-bg">
+                            <div class="progress-fill fill-blue" data-target="40" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <!-- Carbs -->
+                    <div class="macro-item">
+                        <div class="macro-labels">
+                            <span class="macro-name">Carbs</span>
+                            <span class="macro-stats">250g <span class="divider">/</span> <strong class="text-orange">45%</strong></span>
+                        </div>
+                        <div class="progress-bg">
+                            <div class="progress-fill fill-orange" data-target="45" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <!-- Fat -->
+                    <div class="macro-item">
+                        <div class="macro-labels">
+                            <span class="macro-name">Fat</span>
+                            <span class="macro-stats">75g <span class="divider">/</span> <strong class="text-red">15%</strong></span>
+                        </div>
+                        <div class="progress-bg">
+                            <div class="progress-fill fill-red" data-target="15" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hydration -->
+            <div class="card hydration fade-in-up" style="animation-delay: 0.4s">
+                <div class="icon-circle top-right icon-only">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                </div>
+                <div class="card-content-left">
+                    <h3 class="title-left">Hydration</h3>
+                    <div class="hydration-value">
+                        <span class="current-value" id="hydration-counter">0.0</span><span class="total-value">/4L</span>
+                    </div>
+                    <p class="hydration-subtitle">60% of daily goal</p>
+                    
+                    <div class="hydration-pills">
+                        <div class="pill filled"></div>
+                        <div class="pill filled"></div>
+                        <div class="pill filled"></div>
+                        <div class="pill empty"></div>
+                        <div class="pill empty"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MIDDLE ROW: FEATURED RECIPE -->
+        <div class="featured-recipe fade-in-up" style="animation-delay: 0.5s">
+            <div class="recipe-content">
+                <span class="badge">Featured Recipe</span>
+                <h2>Grilled Salmon & Quinoa Bowl</h2>
+                <p>High protein, complex carbs. Perfect post-workout.</p>
+            </div>
+        </div>
+
+        <!-- BOTTOM ROW: WEEKLY OVERVIEW -->
+        <div class="weekly-overview fade-in-up" style="animation-delay: 0.6s">
+            <div class="section-header">
+                <h2>Weekly Overview</h2>
+                <button class="btn-export">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Export
+                </button>
+            </div>
+            
+            <div class="table-container">
+                <table class="overview-table">
+                    <thead>
+                        <tr>
+                            <th>DAY</th>
+                            <th>BREAKFAST</th>
+                            <th>LUNCH</th>
+                            <th>DINNER</th>
+                            <th class="align-right">TARGET</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="day-col">Mon</td>
+                            <td>Oats & Protein Shake</td>
+                            <td>Chicken Rice Bowl</td>
+                            <td>Steak & Sweet Potato</td>
+                            <td class="target-col">3,200</td>
+                        </tr>
+                        <tr>
+                            <td class="day-col">Tue</td>
+                            <td>Eggs & Avocado Toast</td>
+                            <td>Tuna Salad Wrap</td>
+                            <td>Salmon & Quinoa</td>
+                            <td class="target-col">3,250</td>
+                        </tr>
+                        <tr>
+                            <td class="day-col">Wed</td>
+                            <td>Protein Pancakes</td>
+                            <td>Turkey Meatballs & Pasta</td>
+                            <td>White Fish & Asparagus</td>
+                            <td class="target-col">3,100</td>
+                        </tr>
+                        <tr>
+                            <td class="day-col">Thu</td>
+                            <td>Greek Yogurt & Berries</td>
+                            <td>Chicken Salad</td>
+                            <td>Lean Beef Stir-fry</td>
+                            <td class="target-col">3,300</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/mealplans.js"></script>
+</body>
+</html>

@@ -3,51 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTrack Pro - Login</title>
     <link rel="stylesheet" href="../styles/login.css">
-    <title>Document</title>
 </head>
 <body>
-    <div class="text0">
-        <p> IRON PLUSE</p> 
-</div>
- <div class="main">
-    <div class="text">
-<div class="text1">
-    <p>Welcome Back</p>
-</div>
-<div class="text2">
-    <p>Enter your details to access your dashboard.</p></div>
-</div>
-<div class="form">
-    <form action="">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 18h12M6 6h12M2 12h20M4 12v-2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2M4 12v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
+            </svg>
+            FitTrack Pro
+        </div>
+        <div class="nav-links">
+            <a href="#">Dashboard</a>
+            <a href="#">Workouts</a>
+            <a href="#">Nutrition</a>
+            <a href="#" class="active">Community</a>
+            <a href="#">Settings</a>
+        </div>
+    </nav>
 
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <div class="login-card fade-in-up">
+            <div class="card-header">
+                <h1>Welcome Back</h1>
+                <p>Enter your details to access your dashboard.</p>
+            </div>
 
-        <label for="email">Email </label> <br>
-        <input type="text"  id="email" placeholder="you@example.com " required> 
+            <form action="#" class="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <input type="email" id="email" placeholder="athlete@kinetic.com" required>
+                    </div>
+                </div>
 
+                <div class="form-group">
+                    <div class="label-row">
+                        <label for="password">Password</label>
+                        <a href="#" class="forgot-pass">Forgot Password?</a>
+                    </div>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                    </div>
+                </div>
 
-    <label for ="pass"> Password</label>
-       
-    <label for="forgetpass">Forget Password</label>
+                <div class="form-group remember-me">
+                    <label class="checkbox-label">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        Remember me for 30 days
+                    </label>
+                </div>
 
-    <input type="password" id="pass" placeholder="create a password" required>
-    
+                <button type="submit" class="btn-primary">
+                    Login to Dashboard
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
 
-         <input type="checkbox">
-     <label > Remember me for 30 days</label>
+                <div class="divider">
+                    <span>OR CONTINUE WITH</span>
+                </div>
 
+                <div class="social-login">
+                    <button type="button" class="btn-social">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                        </svg>
+                        Google
+                    </button>
+                    <button type="button" class="btn-social">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM15.8617 17.3752C15.3411 18.1565 14.6548 18.9959 13.8055 19.0067C12.9818 19.0175 12.6937 18.5042 11.7584 18.5042C10.8123 18.5042 10.4901 18.9851 9.71966 19.0067C8.91689 19.0283 8.13401 18.0694 7.6027 17.2913C6.48624 15.6595 5.6705 12.558 6.81523 10.5155C7.38141 9.50505 8.39655 8.85125 9.48911 8.83063C10.2885 8.80902 11.0427 9.38719 11.5363 9.38719C12.0298 9.38719 12.9697 8.68366 13.9452 8.80578C14.3541 8.82307 15.5235 8.97437 16.2731 10.0983C16.2114 10.1383 14.8698 10.9326 14.8914 12.5158C14.9184 14.3854 16.536 15.0295 16.5684 15.0446C16.5441 15.1106 16.2974 15.9685 15.8617 17.3752ZM13.8164 7.63212C14.281 7.05499 14.5936 6.25744 14.5054 5.44917C13.8161 5.47835 12.9691 5.92251 12.4831 6.48994C12.0461 6.99354 11.6669 7.82026 11.7766 8.60483C12.548 8.66751 13.3517 8.20925 13.8164 7.63212Z"/>
+                        </svg>
+                        Apple
+                    </button>
+                </div>
+            </form>
 
-       <button class="login-btn">Login to Dashboard --> </button>
+            <div class="card-footer">
+                Don't have an account? <a href="../html/signup.html">Create an account</a>
+            </div>
+        </div>
+    </main>
 
- <p class="divider"> OR CONTINUE WITH</p>
-  <div class="social-btns">
-        <button class="social-btns">Google <link rel="stylesheet" href=""></button>
-        <button class="social-btns">Apple</button>
- </div>
-</form>
-</div>
- <p class="footer-text">Don`t have an account? <a href="../html/signup.html">Create an account</a></p>
-
- </div>   
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-left">
+            © 2024 FITTRACK PRO. KINETIC PRECISION PERFORMANCE.
+        </div>
+        <div class="footer-right">
+            <a href="#">PRIVACY</a>
+            <a href="#">TERMS</a>
+            <a href="#">SUPPORT</a>
+            <a href="#">API</a>
+        </div>
+    </footer>
 </body>
 </html>

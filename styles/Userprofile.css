@@ -1,604 +1,673 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+:root {
+  --sidebar-bg: #111827;
+  --sidebar-text: #9ca3af;
+  --sidebar-text-active: #ffffff;
+  --sidebar-hover: #1f2937;
+  
+  --bg-color: #f9fafb;
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --danger: #ef4444;
+  --danger-bg: #fef2f2;
+  --danger-border: #fca5a5;
+  
+  --card-bg: #ffffff;
+  --border-color: #e5e7eb;
+}
+
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
 }
 
 body {
-  font-family: 'DM Sans', sans-serif;
-  background: #F4F6FA;
-  color: #0F1828;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  display: flex;
   min-height: 100vh;
-  padding: 36px 40px 60px;
+}
+
+.layout-wrapper {
+  display: flex;
+  width: 100%;
 }
 
 /* ================================================
-   MAIN WRAPPER
+   SIDEBAR
    ================================================ */
-.main {
-  max-width: 960px;
-  margin: 0 auto;
+.sidebar {
+  width: 260px;
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
 }
 
-/* ================================================
-   TOP HEADER ROW  (title + buttons)
-   ================================================ */
-.text0 {
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
+  margin-bottom: 40px;
 }
 
-/* Title block */
-.text1 {
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   flex: 1;
-  min-width: 0;
 }
 
-.text1 p {
-  font-family: 'Syne', sans-serif;
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: #0F1828;
-  line-height: 1.1;
-}
-
-.text2 p {
-  font-size: 0.9rem;
-  color: #6B7280;
-  white-space: nowrap;
-}
-
-/* Buttons */
-.cancel,
-.savechange {
-  padding: 10px 22px;
+.nav-links a {
+  text-decoration: none;
+  color: var(--sidebar-text);
+  padding: 12px 16px;
   border-radius: 8px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, transform 0.12s;
-  border: none;
-}
-
-.cancel {
-  background: #FFFFFF;
-  color: #0F1828;
-  border: 1.5px solid #E5E9F0;
-}
-.cancel:hover   { border-color: #b0b8c8; background: #f8f9fb; }
-.cancel:active  { transform: scale(0.97); }
-
-.savechange {
-  background: #4F8EF7;
-  color: #fff;
-  border: 1.5px solid #4F8EF7;
-}
-.savechange:hover  { background: #3a7aef; border-color: #3a7aef; }
-.savechange:active { transform: scale(0.97); }
-
-/* ================================================
-   TWO-COLUMN LAYOUT
-   The profile + personal details sit left;
-   focus / trophies sit right — achieved with a grid
-   ================================================ */
-.main {
-  display: grid;
-  /* reuse .main as the grid wrapper */
-}
-
-/* We need an inner layout wrapper.
-   Since the HTML doesn't have one, we use a subgrid trick
-   by targeting the direct children that form the two columns */
-
-/* Left column: .profile + .personal-details */
-.profile {
-  background: #FFFFFF;
-  border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(15,24,40,0.07);
-  padding: 32px 24px 24px;
-  text-align: center;
-  position: relative;
-  grid-column: 1;
-  grid-row: 2;
-  animation: fadeUp 0.4s ease both 0.05s;
-}
-
-.personal-details {
-  background: #FFFFFF;
-  border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(15,24,40,0.07);
-  padding: 24px;
-  grid-column: 1;
-  grid-row: 3;
-  margin-top: 20px;
-  animation: fadeUp 0.4s ease both 0.1s;
-}
-
-/* Right column cards */
-.header1,
-.header2,
-.header3 {
-  background: #FFFFFF;
-  border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(15,24,40,0.07);
-  padding: 24px;
-  animation: fadeUp 0.4s ease both;
-}
-
-/* Override: use CSS grid on .main for two-column layout */
-.main {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  grid-template-rows: auto;
-  column-gap: 24px;
-  row-gap: 20px;
-  align-items: start;
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-/* Header row spans both columns */
-.text0 {
-  grid-column: 1 / -1;
-  grid-row: 1;
-}
-
-/* Left column */
-.profile         { grid-column: 1; grid-row: 2;    margin-top: 0; }
-.personal-details{ grid-column: 1; grid-row: 3 / 6; margin-top: 0; }
-
-/* Right column */
-.header1 { grid-column: 2; grid-row: 2;    animation-delay: 0.07s; }
-.header2 { grid-column: 2; grid-row: 3;    animation-delay: 0.12s; }
-.header3 { grid-column: 2; grid-row: 4;    animation-delay: 0.17s; min-height: 0; padding: 0; box-shadow: none; background: transparent; }
-
-/* Trophy section spans right column bottom area */
-.text6 { grid-column: 2; grid-row: 5; }
-.tags  { grid-column: 2; grid-row: 6; }
-
-/* ================================================
-   PROFILE CARD
-   ================================================ */
-.profile-avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #E5E9F0;
-  background: #e8f0fe;
-  display: block;
-  margin: 0 auto 16px;
-}
-
-.name {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #0F1828;
-  margin-bottom: 4px;
-}
-
-.membership {
-  font-size: 0.85rem;
-  color: #6B7280;
-  margin-bottom: 14px;
-}
-
-.streak-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: #f0fdf4;
-  color: #16a34a;
-  border-radius: 50px;
-  padding: 6px 16px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  border: 1px solid #bbf7d0;
-  margin-bottom: 14px;
-}
-
-.streak-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #22c55e;
-  flex-shrink: 0;
-  animation: pulse-dot 1.5s infinite;
-}
-
-.avatar-edit-btn {
-  position: absolute;
-  top: 118px;
-  left: 50%;
-  transform: translateX(28px);
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: #4F8EF7;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.avatar-edit-btn::after {
-  content: "✏️";
-  font-size: 13px;
+  font-weight: 500;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+  gap: 12px;
+  transition: all 0.2s ease;
 }
 
-.avatar-edit-btn:hover { background: #3a7aef; }
-
-/* ================================================
-   PERSONAL DETAILS FORM
-   ================================================ */
-.personal-details {
-  display: flex;
-  flex-direction: column;
+.nav-links a:hover, .nav-links a.active {
+  background-color: var(--sidebar-hover);
+  color: var(--sidebar-text-active);
+  transform: translateX(4px);
 }
 
-.mainform {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-/* Section title above form */
-.personal-details::before {
-  content: "Personal Details";
-  font-family: 'Syne', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #0F1828;
-  margin-bottom: 20px;
-  display: block;
-}
-
-.mainform label {
-  display: block;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.07em;
-  color: #6B7280;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-  margin-top: 14px;
-}
-
-.mainform label:first-child { margin-top: 0; }
-
-.mainform input[type="text"] {
-  width: 100%;
-  padding: 9px 12px;
-  border: 1.5px solid #E5E9F0;
-  border-radius: 8px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.92rem;
-  color: #0F1828;
-  background: #fff;
-  outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.mainform input[type="text"]:focus {
-  border-color: #4F8EF7;
-  box-shadow: 0 0 0 3px rgba(79,142,247,0.12);
-}
-
-/* Height & Weight sit side by side */
-#height,
-#weight {
-  width: calc(50% - 6px);
-  display: inline-block;
-}
-
-#height { margin-right: 12px; }
-
-/* ================================================
-   CURRENT FOCUS  (header1)
-   ================================================ */
-.header1 {
+.sidebar-bottom {
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.text5 {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.focus {
-  font-family: 'Syne', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #0F1828;
+.user-status-card {
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  padding: 12px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
+  color: var(--text-main);
 }
 
-.focus img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
+.small-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-.weeks {
-  font-size: 0.8rem;
-  color: #6B7280;
+.status-info h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 2px;
 }
 
-/* Marathon active card */
-.marathon {
-  border: 1.5px solid #4F8EF7;
-  border-radius: 12px;
-  padding: 14px 16px 8px;
-  background: #fafcff;
-  position: relative;
-}
-
-.marathon::before {
-  content: "ACTIVE";
-  position: absolute;
-  top: -1px;
-  right: 14px;
-  background: #4F8EF7;
-  color: #fff;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  padding: 3px 9px;
-  border-radius: 0 0 6px 6px;
-}
-
-.marth {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #0F1828;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-
-.marth img {
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
-}
-
-/* Progress bar row */
-.progress-container {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.progress-container::before {
-  content: "Progress";
+.status-info p {
   font-size: 0.75rem;
-  color: #6B7280;
-  display: flex;
-  justify-content: space-between;
+  color: var(--text-muted);
 }
 
-.progress-bar {
-  height: 6px;
-  border-radius: 99px;
-  background: #E8F0FE;
-  overflow: hidden;
-  position: relative;
-}
-
-/* Hide the native range input and fake a filled bar at 45% */
-.progress-bar input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  position: absolute;
-  top: 0; left: 0;
+.start-session-btn {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
-  outline: none;
+  transition: background-color 0.2s, transform 0.1s;
 }
 
-.progress-bar input[type="range"]::-webkit-slider-runnable-track {
-  height: 6px;
-  border-radius: 99px;
-  background: linear-gradient(
-    to right,
-    #4F8EF7 0%, #4F8EF7 45%,
-    #E8F0FE 45%, #E8F0FE 100%
-  );
+.start-session-btn:hover { 
+  background-color: var(--primary-hover); 
+  transform: translateY(-1px); 
 }
-
-.progress-bar input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 0;
-  height: 0;
-}
-
-.progress-bar input[type="range"]::-moz-range-track {
-  height: 6px;
-  border-radius: 99px;
-  background: linear-gradient(
-    to right,
-    #4F8EF7 0%, #4F8EF7 45%,
-    #E8F0FE 45%, #E8F0FE 100%
-  );
+.start-session-btn:active { 
+  transform: translateY(0); 
 }
 
 /* ================================================
-   HYPERTROPHY  (header2)
+   MAIN CONTENT
    ================================================ */
-.header2 {
-  padding: 20px 24px;
+.main-content {
+  flex: 1;
+  padding: 40px 60px;
+  overflow-y: auto;
 }
 
-.hyper {
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.header-titles h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.header-titles p {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-cancel {
+  background: white;
+  border: 1px solid var(--border-color);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-cancel:hover { 
+  background: #f9fafb; 
+  border-color: #d1d5db; 
+}
+
+.btn-save {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+}
+
+.btn-save:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 6px 8px -1px rgba(59, 130, 246, 0.3);
+  transform: translateY(-1px);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+  align-items: start;
+  max-width: 1200px;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+  padding: 32px;
+}
+
+/* ================================================
+   PROFILE CARD
+   ================================================ */
+.profile-card {
+  text-align: center;
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  align-items: center;
 }
 
-.hypertrophy {
-  font-family: 'Syne', sans-serif;
-  font-size: 0.95rem;
+.avatar-wrapper {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.avatar-wrapper img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #f3f4f6;
+  transition: transform 0.3s ease;
+}
+
+.profile-card:hover .avatar-wrapper img {
+  transform: scale(1.05);
+}
+
+.edit-avatar {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: var(--primary);
+  color: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.edit-avatar:hover { 
+  transform: scale(1.15) rotate(10deg); 
+  background-color: var(--primary-hover);
+}
+
+.profile-card h2 {
+  font-size: 1.25rem;
   font-weight: 700;
-  color: #0F1828;
+  margin-bottom: 4px;
+}
+
+.membership-tier {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-bottom: 16px;
+}
+
+.streak-badge {
+  background: #ecfdf5;
+  color: #059669;
+  padding: 6px 16px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.05em;
+  transition: transform 0.2s;
+}
+.streak-badge:hover {
+  transform: scale(1.05);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background-color: #10b981;
+  border-radius: 50%;
+}
+
+.pulse {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* ================================================
+   PERSONAL DETAILS
+   ================================================ */
+.details-card {
+  margin-top: 24px;
+  padding: 24px;
+}
+
+.details-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: #f9fafb;
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.input-group input:focus {
+  border-color: var(--primary);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+}
+
+.half { 
+  flex: 1; 
+  margin-bottom: 0; 
+}
+
+.input-with-unit {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-with-unit input {
+  padding-right: 40px;
+}
+
+.input-with-unit .unit {
+  position: absolute;
+  right: 12px;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* ================================================
+   RIGHT COLUMN FOCUS SECTION
+   ================================================ */
+.section-title {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-main);
 }
 
-.hypertrophy img {
-  width: 18px;
-  height: 18px;
+.section-title .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.focus-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.focus-card {
+  padding: 20px;
+  border: 1.5px solid transparent;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.focus-card:hover { 
+  transform: translateY(-4px); 
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+.focus-card.active {
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+
+.active-badge {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  background: var(--primary);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 0 0 8px 8px;
+  letter-spacing: 0.05em;
+}
+
+.focus-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.focus-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+.focus-card:hover .focus-icon-circle {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.focus-icon-circle img {
+  width: 24px;
+  height: 24px;
   object-fit: contain;
 }
 
-.hyper p {
-  font-size: 0.82rem;
-  color: #6B7280;
+.focus-icon-circle.blue {
+  background: #eff6ff;
+  color: var(--primary);
 }
 
-/* Muted progress bar for Hypertrophy */
-.header2::after {
-  content: "";
-  display: block;
-  height: 5px;
+.focus-icon-circle.gray {
+  background: #f3f4f6;
+  color: var(--text-muted);
+}
+
+.focus-info h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.focus-info p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.blue-text { 
+  color: var(--primary); 
+  font-weight: 700; 
+}
+
+.progress-bar-bg {
+  height: 6px;
+  background: #e5e7eb;
   border-radius: 99px;
-  background: linear-gradient(
-    to right,
-    #C8D0DE 0%, #C8D0DE 75%,
-    #E5E9F0 75%, #E5E9F0 100%
-  );
-  margin-top: 12px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 99px;
+  width: 0; 
+  animation: loadProgress 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.8s;
+}
+
+.progress-bar-fill.gray {
+  background: #9ca3af;
+  animation: none;
+}
+
+@keyframes loadProgress {
+  from { width: 0; }
+  to { width: 45%; } 
 }
 
 /* ================================================
    TROPHY CABINET
    ================================================ */
-.text6 {
-  font-family: 'Syne', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #0F1828;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #FFFFFF;
-  border-radius: 16px 16px 0 0;
-  box-shadow: 0 2px 16px rgba(15,24,40,0.07);
-  padding: 24px 24px 0;
-  margin-top: 0;
+.trophy-cabinet {
+  margin-bottom: 32px;
+  padding: 24px 32px;
 }
 
-.text6::before {
-  content: "🏆";
-  font-size: 1.1rem;
-}
-
-.tags {
-  background: #FFFFFF;
-  border-radius: 0 0 16px 16px;
-  box-shadow: 0 2px 16px rgba(15,24,40,0.07);
-  padding: 16px 24px 24px;
+.trophies-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  animation: fadeUp 0.4s ease both 0.2s;
+  gap: 16px;
 }
 
-.tags h3 {
+.trophy-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  padding: 16px 8px;
+  border-radius: 12px;
+  transition: background-color 0.2s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: default;
+}
+
+.trophy-item:hover {
+  background-color: #f9fafb;
+  transform: translateY(-6px);
+}
+
+.trophy-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  padding: 10px 6px;
-  border-radius: 10px;
-  transition: background 0.18s, transform 0.15s;
-  cursor: pointer;
+  margin-bottom: 12px;
+  background: #f9fafb;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.tags h3:hover {
-  background: #F4F6FA;
-  transform: translateY(-2px);
+.trophy-item:hover .trophy-icon {
+  transform: scale(1.15) rotate(5deg);
 }
 
-.tags h3 img {
-  width: 44px;
-  height: 44px;
+.trophy-icon img {
+  width: 28px;
+  height: 28px;
   object-fit: contain;
+}
+
+.trophy-icon.orange { border-color: #fdba74; background: #fff7ed; }
+.trophy-icon.blue { border-color: #93c5fd; background: #eff6ff; }
+
+.trophy-item h4 {
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.trophy-item p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
 }
 
 /* ================================================
    DANGER ZONE
-   — appended via a pseudo element on .personal-details
    ================================================ */
-/* We can't add new elements via CSS, but we can style
-   any existing empty .header3 as the danger zone */
-.header3 {
-  grid-column: 2;
-  grid-row: 4;
-  background: #FFFFFF;
-  border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(15,24,40,0.07);
-  padding: 22px 24px;
-  min-height: auto;
+.danger-zone {
+  margin-top: 40px;
+}
+
+.danger-title {
+  color: var(--danger);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.danger-zone p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid var(--danger-border);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: var(--danger-bg);
+}
+
+.btn-danger:hover {
+  background: var(--danger);
+  color: white;
+  transform: translateY(-1px);
 }
 
 /* ================================================
-   ANIMATIONS
+   GLOBAL ANIMATIONS
    ================================================ */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-@keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
-  50%       { box-shadow: 0 0 0 5px rgba(34,197,94,0); }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ================================================
    RESPONSIVE
    ================================================ */
-@media (max-width: 760px) {
-  body { padding: 20px 16px 40px; }
+@media (max-width: 1024px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .main-content { padding: 32px; }
+}
 
-  .main {
-    grid-template-columns: 1fr;
-  }
-
-  .text0,
-  .profile,
-  .personal-details,
-  .header1,
-  .header2,
-  .header3,
-  .text6,
-  .tags {
-    grid-column: 1 !important;
-    grid-row: auto !important;
-  }
-
-  .tags { grid-template-columns: repeat(2, 1fr); }
-
-  #height, #weight { width: 100%; display: block; }
-  #height { margin-right: 0; }
+@media (max-width: 768px) {
+  .layout-wrapper { flex-direction: column; }
+  .sidebar { width: 100%; height: auto; position: static; padding: 16px; }
+  .nav-links { flex-direction: row; flex-wrap: wrap; }
+  .focus-cards { grid-template-columns: 1fr; }
+  .trophies-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .header-actions { flex-direction: column; }
 }

@@ -1,191 +1,455 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg-dark: #121826;
+  --bg-gradient-start: #f1f4f9;
+  --bg-gradient-end: #e2e8f0;
+  
+  --primary: #126ff5;
+  --primary-hover: #0a5ad6;
+  --primary-light: #e6f0fe;
+  
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --text-light: #9ca3af;
+  
+  --card-bg: #ffffff;
+  --border-color: #e5e7eb;
+}
+
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-.main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    background-color: #faf8ff;
-    width: 30%;
-height: 75vh;
-margin: 40px auto;
-}
-.text0{
-background-color: #1342a6;
-color: #faf8ff;
-display: flex;
-align-items: flex-start;
-font-size: x-large;
-
-}
-.text1{
-font-size: x-large;
-font-weight: bolder;
-margin-left: 50px;
-font-style: italic;
-}
-.text2{
-  margin-bottom: 0px ;
-font-style: italic;
-}
-.form {
-  width: 80%;
-  height: 100vh;
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-dark); /* Fallback */
+  color: var(--text-main);
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  min-height: 100vh;
+}
+
+/* ================================================
+   NAVBAR
+   ================================================ */
+.navbar {
+  background-color: var(--bg-dark);
+  padding: 0 40px;
+  height: 72px;
+  display: flex;
   align-items: center;
-  background-color: #faf8ff;
+  justify-content: space-between;
 }
 
-form label[for="email"]{
-  font-size: 1rem;
-  font-weight: 300;
-  margin: 0.4rem 0 0.3rem;  
-  letter-spacing: 0.011em;
-  gap:8px;
-
-  
-  
-}
-form label[for="pass"]{
-  font-size: 0.9rem;
-font-weight: 300;
-cursor: pointer;
-margin: bottom 6px; 
-margin-top: 18px;
-
-}
-label[for="forgetpass"]{
-  float: right;
-  font-size: 0.9rem;
-  font-weight: 300;
-  cursor: pointer;
-  transition: color 0.2s;
-
-}
-input[type="text"]{
-  width: 100%;
-  padding: 0.75rem;
-  border: none;
-   border-radius: 2rem;
-  background-color: #ccc;
-  margin-bottom: 15px;
-  margin-top: 20px;
-   
-}
-input[type="password"]{
-  width: 100%;
-  padding: 0.75rem;
-  border: none;
-   border-radius: 2rem;
-  background-color: #ccc;
-  margin-bottom: 5px ;
-  margin-top: 20px; 
-
-
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-input[type="checkbox"]{
-  width: 15px;
-  height: 15px;
-  cursor: pointer;
-  margin-top: 25px;
-  margin-bottom: 25px;
-vertical-align: middle;
+.nav-links {
+  display: flex;
+  gap: 32px;
+  height: 100%;
 }
-input[type="checkbox"] +label{
-font-size: 0.93rem;
-font-weight: 300;
-vertical-align: middle;
-margin-left: 6px;
-padding:1px 2px ;
-margin-top: 25px;
-margin-bottom: 25px;
-}
-.login-btn{
-width: 100%;
-display: block;
-padding: 0.75rem;
-font-family: sans-serif;
-border: none;
-border-radius: 2rem;
-background: var(--brand);
-color: #fff;
-cursor: pointer;
-background-color:rgb(56, 56, 205) ;
-transition: background 0.2s, transform 0.15s ,box-shadow 0.2s;
-box-shadow: 0 4px 16px rgba (26,86,219,0.35); 
-margin-bottom: 20px;
-}
-.divider {
-  width: 100%;
-  text-align: center;
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-light);
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
   position: relative;
-  margin: 16px 0;
+  transition: color 0.2s;
+  height: 100%;
+}
+
+.nav-links a:hover {
+  color: #fff;
+}
+
+.nav-links a.active {
+  color: var(--primary);
+}
+
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--primary);
+  border-radius: 3px 3px 0 0;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* ================================================
+   MAIN CONTENT
+   ================================================ */
+.main-content {
+  flex: 1;
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.login-card {
+  background: var(--card-bg);
+  width: 100%;
+  max-width: 440px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  padding: 48px 40px;
+  position: relative;
+  z-index: 10;
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.card-header h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.card-header p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* FORM STYLES */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.label-row label {
+  margin-bottom: 0;
+}
+
+.forgot-pass {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.forgot-pass:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  color: #9ca3af;
+  pointer-events: none;
+  transition: color 0.2s;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 14px 12px 42px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  background: #fcfcfd;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.input-wrapper input::placeholder {
+  color: #9ca3af;
+  letter-spacing: normal;
+}
+
+/* Specific style for password placeholder to look like dots */
+#password::placeholder {
+  letter-spacing: 2px;
+  font-size: 1rem;
+}
+
+.input-wrapper input:focus {
+  border-color: var(--primary);
+  background: #fff;
+  box-shadow: 0 0 0 4px var(--primary-light);
+}
+
+.input-wrapper input:focus + .input-icon {
+  color: var(--primary);
+}
+
+/* CHECKBOX */
+.remember-me {
+  margin-bottom: 24px;
+  margin-top: -4px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  color: var(--text-muted) !important;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  width: 18px;
+  height: 18px;
+  background-color: #f3f4f6;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.checkbox-label:hover input ~ .checkmark {
+  background-color: #e5e7eb;
+}
+
+.checkbox-label input:checked ~ .checkmark {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 6px;
+  top: 3px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-label input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* PRIMARY BUTTON */
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(18, 111, 245, 0.2);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  box-shadow: 0 6px 16px rgba(18, 111, 245, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-primary svg {
+  transition: transform 0.2s;
+}
+
+.btn-primary:hover svg {
+  transform: translateX(4px);
+}
+
+/* DIVIDER */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 32px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .divider span {
+  padding: 0 16px;
+  color: var(--text-light);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* SOCIAL LOGIN */
+.social-login {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.btn-social {
+  padding: 12px;
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-family: inherit;
   font-size: 0.9rem;
-  color: #888;
-  letter-spacing: 1px;
-  background: transparent;
-  padding: 0 10px;
-}
-.divider::before,
-.divider::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 24.5%;
-  height: 2px;
-  background: #888;
-}
-.divider::before {
-  left: 0;
-}
-
-.divider::after {
-  right: 0;
-}
-.social-btns{
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
   display: flex;
-  width: 100%;
-  border: none;
-  padding: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s;
 }
-.social-btns button{
-  flex: 1;
-  padding: 10px 16px;
-border: 1.5px solid;
-background: #fff;
-font-family: sans-serif;
-font-size: 0.9rem;
-font-weight: 500;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-.footer-text {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 1.2rem;
-  color: #6b7280;
-float: left;
-}
-.footer-text a {
-  color: #2563eb;
-  text-decoration: underline;
-  font-weight: 500;
-  margin-left: 5px;
-  transition: 0.3s;
 
+.btn-social:hover {
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+  transform: translateY(-1px);
 }
-.footer-text a:hover {
-  color: #1d4ed8;
+
+.btn-social:active {
+  transform: translateY(0);
+}
+
+/* CARD FOOTER */
+.card-footer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.card-footer a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.card-footer a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* ================================================
+   FOOTER
+   ================================================ */
+.footer {
+  background-color: var(--bg-dark);
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.footer-right {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-right a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-right a:hover {
+  color: #fff;
+}
+
+/* ================================================
+   ANIMATIONS
+   ================================================ */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+@media (max-width: 768px) {
+  .navbar { padding: 0 20px; }
+  .nav-links { display: none; /* In a real app, show a hamburger menu */ }
+  .footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px 20px; }
+  .login-card { padding: 40px 24px; }
 }
