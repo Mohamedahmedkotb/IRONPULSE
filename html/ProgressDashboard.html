@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitness Progress</title>
+  <link rel="stylesheet" href="../styles/ProgressDashboard.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div>
+      <h1>Progress</h1>
+      <p>Track your athletic journey and key performance indicators.</p>
+    </div>
+
+    <div class="tabs">
+      <button class="active">Volume</button>
+      <button>Intensity</button>
+      <button>Frequency</button>
+      <button>Recovery</button>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <p class="label">BEST PR LIFT</p>
+      <h2>315 lbs</h2>
+      <span class="green">+15 lbs this month</span>
+    </div>
+
+    <div class="card">
+      <p class="label">CURRENT STREAK</p>
+      <h2>14 Days</h2>
+      <span class="orange">Personal Best: 21</span>
+    </div>
+
+    <div class="card">
+      <p class="label">TOTAL VOLUME</p>
+      <h2>12.4k</h2>
+      <span class="blue">Top 5% of athletes</span>
+    </div>
+  </div>
+
+ 
+  <div class="charts">
+    <div class="chart-box">
+      <h3>Volume Load Over Time</h3>
+      <canvas id="lineChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <h3>Weekly Distribution</h3>
+      <canvas id="barChart"></canvas>
+    </div>
+  </div>
+
+  <div class="recent">
+    <h3>Recent PRs</h3>
+
+    <div class="item">
+      <div>
+        <strong>Deadlift - 1RM</strong>
+        <p>Oct 24, 2024</p>
+      </div>
+      <div class="right">
+        <strong>405 lbs</strong>
+        <br><span class="green">+20 lbs</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div>
+        <strong>5K Run Time</strong>
+        <p>Oct 20, 2024</p>
+      </div>
+      <div class="right">
+        <strong>22:45</strong>
+        <br><span class="green">↓ -0:30 sec</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div>
+        <strong>Pull-ups – Max Reps</strong>
+        <p>Oct 15, 2024</p>
+      </div>
+      <div class="right">
+        <strong>18 Reps</strong>
+        <br><span class="green">+2 Reps</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2024 FITTRACK PRO. KINETIC PRECISION PERFORMANCE.</p>
+  <div class="footer-links">
+    <span>Privacy</span>
+    <span>Terms</span>
+    <span>Support</span>
+    <span>API</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../js/Chart.js"></script>
+
+</body>
+</html>
