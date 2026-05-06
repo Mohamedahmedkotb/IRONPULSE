@@ -8,10 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 2. Header Tabs Toggle
+    // 2. Header Tabs Toggle with Redirection
     const tabs = document.querySelectorAll('.tab');
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
+            if (tab.textContent.trim() === 'Saved Routines') {
+                window.location.href = 'savedRoutine.html';
+                return;
+            }
             tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
         });
@@ -23,14 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (closeBtn && recommendationCard) {
         closeBtn.addEventListener('click', () => {
-            // Add a fade out animation
             recommendationCard.style.transition = 'opacity 0.3s ease, transform 0.3s ease, margin 0.3s ease, padding 0.3s ease, height 0.3s ease';
             recommendationCard.style.opacity = '0';
             recommendationCard.style.transform = 'scale(0.95)';
-            recommendationCard.style.height = recommendationCard.offsetHeight + 'px'; // Fix height for smooth collapse
+            recommendationCard.style.height = recommendationCard.offsetHeight + 'px'; 
             
-            // Force reflow
-            recommendationCard.offsetHeight;
+            recommendationCard.offsetHeight; // Force reflow
             
             recommendationCard.style.height = '0';
             recommendationCard.style.padding = '0';
@@ -52,41 +54,33 @@ document.addEventListener('DOMContentLoaded', () => {
         addExerciseBtn.addEventListener('click', () => {
             const exerciseItems = document.querySelectorAll('.exercise-item');
             if (exerciseItems.length > 0) {
-                // Clone the first item
                 const newExercise = exerciseItems[0].cloneNode(true);
                 
-                // Clear the input values
                 const inputs = newExercise.querySelectorAll('input');
                 inputs.forEach(input => input.value = '');
                 
-                // Reset placeholder text
                 const title = newExercise.querySelector('h3');
                 if (title) title.textContent = 'New Exercise';
                 
                 const subtitle = newExercise.querySelector('p');
                 if (subtitle) subtitle.textContent = 'Select muscle group';
                 
-                // Add a small entrance animation to the new item
                 newExercise.style.opacity = '0';
                 newExercise.style.transform = 'translateY(10px)';
                 newExercise.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                 
-                // Append to list
                 exerciseList.appendChild(newExercise);
                 
-                // Trigger animation
                 setTimeout(() => {
                     newExercise.style.opacity = '1';
                     newExercise.style.transform = 'translateY(0)';
                 }, 10);
                 
-                // Update movement counter badge
                 updateMovementBadge();
             }
         });
     }
 
-    // Helper to update the badge count
     function updateMovementBadge() {
         const badge = document.querySelector('.exercise-header .badge');
         if (badge) {
@@ -94,4 +88,143 @@ document.addEventListener('DOMContentLoaded', () => {
             badge.textContent = `${currentCount} Movements`;
         }
     }
+
+    // --- BUTTON HANDLERS ---
+
+    // 5. Sidebar Navigation
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href === '#' || href === '') {
+                e.preventDefault(); // Prevent default anchor behavior only if it's a dummy link
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // 6. Start Session Button
+    const startSessionBtn = document.querySelector('.start-session-btn');
+    if (startSessionBtn) {
+        startSessionBtn.addEventListener('click', () => {
+            const originalText = startSessionBtn.innerHTML;
+            startSessionBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Starting...';
+            setTimeout(() => {
+                startSessionBtn.innerHTML = originalText;
+                alert('Session Started! Ready to crush it.');
+            }, 800);
+        });
+    }
+
+    // 7. Save Draft Button (Saves to LocalStorage)
+    const saveDraftBtn = document.querySelector('.btn-secondary');
+    if (saveDraftBtn) {
+        saveDraftBtn.addEventListener('click', () => {
+            
+            // Collect Routine Data
+            const routineNameInput = document.getElementById('routine-name');
+            const routineName = routineNameInput && routineNameInput.value.trim() !== '' 
+                                ? routineNameInput.value.trim() 
+                                : 'Draft Routine';
+            
+            const activeDays = Array.from(document.querySelectorAll('.day-pill.active')).map(pill => pill.textContent);
+            
+            const exercises = [];
+            document.querySelectorAll('.exercise-item').forEach(item => {
+                const title = item.querySelector('h3') ? item.querySelector('h3').textContent : 'Unknown Exercise';
+                const inputs = item.querySelectorAll('input');
+                const sets = inputs.length > 0 ? inputs[0].value : '0';
+                const reps = inputs.length > 1 ? inputs[1].value : '0';
+                
+                exercises.push({
+                    title: title,
+                    sets: sets,
+                    reps: reps
+                });
+            });
+
+            // Create Routine Object
+            const newRoutine = {
+                id: Date.now(),
+                name: routineName,
+                days: activeDays,
+                exercises: exercises,
+                dateSaved: new Date().toLocaleDateString()
+            };
+
+            // Save to Local Storage
+            let savedRoutines = [];
+            const existingRoutines = localStorage.getItem('savedRoutines');
+            if (existingRoutines) {
+                try {
+                    savedRoutines = JSON.parse(existingRoutines);
+                } catch(e) {}
+            }
+            
+            savedRoutines.push(newRoutine);
+            localStorage.setItem('savedRoutines', JSON.stringify(savedRoutines));
+
+            // UI Feedback
+            const originalText = saveDraftBtn.textContent;
+            saveDraftBtn.textContent = 'Saving...';
+            setTimeout(() => {
+                saveDraftBtn.textContent = 'Saved!';
+                setTimeout(() => {
+                    saveDraftBtn.textContent = originalText;
+                }, 2000);
+            }, 500);
+        });
+    }
+
+    // 8. Publish Routine Button
+    const publishBtn = document.querySelector('.btn-primary');
+    if (publishBtn) {
+        publishBtn.addEventListener('click', () => {
+            const originalHtml = publishBtn.innerHTML;
+            publishBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Publishing...';
+            setTimeout(() => {
+                publishBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Published!';
+                setTimeout(() => {
+                    publishBtn.innerHTML = originalHtml;
+                }, 2000);
+            }, 800);
+        });
+    }
+
+    // 9. Movement Library Tags
+    const tags = document.querySelectorAll('.tag');
+    tags.forEach(tag => {
+        tag.addEventListener('click', () => {
+            tag.classList.toggle('active');
+            if(tag.classList.contains('active')) {
+                tag.style.backgroundColor = 'var(--primary-color, #f97316)';
+                tag.style.color = 'white';
+                tag.style.borderColor = 'var(--primary-color, #f97316)';
+            } else {
+                tag.style.backgroundColor = '';
+                tag.style.color = '';
+                tag.style.borderColor = '';
+            }
+        });
+    });
+
+    // 10. View All Templates Link
+    const viewAllLink = document.querySelector('.view-all');
+    if (viewAllLink) {
+        viewAllLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Opening all templates library...');
+        });
+    }
+
+    // 11. Template Items
+    const templateItems = document.querySelectorAll('.template-item');
+    templateItems.forEach(item => {
+        item.style.cursor = 'pointer';
+        item.addEventListener('click', () => {
+            const title = item.querySelector('h4').textContent;
+            alert(`Loading template: ${title}`);
+        });
+    });
 });
