@@ -1,4 +1,3 @@
-/* Root Variables */
 :root {
     --bg-dark: #111520;
     --bg-main: #f4f6fb;
@@ -137,12 +136,12 @@ body {
 }
 
 .progress-ring {
-    transform: rotate(-90deg);
+    transform: rotate(-180);
 }
 
 .progress-ring__circle {
-    stroke-dasharray: 440; /* 2 * pi * 70 */
-    stroke-dashoffset: 88; /* 20% offset for 80% full */
+    stroke-dasharray: 440; 
+    stroke-dashoffset: 88; 
     transition: stroke-dashoffset 0.5s ease-in-out;
     stroke-linecap: round;
 }

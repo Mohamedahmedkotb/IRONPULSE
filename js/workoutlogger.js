@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pauseBtn = document.getElementById('pause-btn');
     const progressCircle = document.querySelector('.progress-ring__circle');
     
-    let secondsElapsed = 45 * 60 + 22; // Starting at 45:22 as per mockup
+    let secondsElapsed = 0; // Starting at 45:22 as per mockup
     let timerInterval = null;
     let isPaused = false;
     
