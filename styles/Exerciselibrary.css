@@ -24,10 +24,8 @@ display: flex;
 }
 .herosection{
 display: flex;
-justify-content: space-between;
 width: 100%;
 align-items: center;
-
 }
 .text1{
 font-family: 'Syne', sans-serif;
@@ -43,30 +41,7 @@ font-size: 15px;
   font-weight: 400;
   margin-top: 4px;
 }
-.customexercise{ 
-  gap: 8px;
-  background:  #2563eb;
-  color: #fff;
-  border: none;
-  border-radius:14px;;
-  padding: 13px 24px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  box-shadow: 0 4px 14px rgba(37,99,235,.35);
-  transition: background .2s, transform .15s, box-shadow .2s;
-}
 
-.customexercise:hover {
-  background: #1d4ed8;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(37,99,235,.45);
-}
-.customexercise:active {
-     transform: translateY(0);
- }
  
 .form{
   background: #ffffff;

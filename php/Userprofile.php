@@ -1,14 +1,23 @@
-<!DOCTYPE html>
+<?php
+session_start();
 
+// Redirect to login if not authenticated
+if (!isset($_SESSION['email'])) {
+    header('Location: ../html/login.html');
+    exit;
+}
+
+$userName = $_SESSION['name'] ?? 'Athlete';
+$userEmail = $_SESSION['email'] ?? '';
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>FitTrack Pro - Profile</title>
-<link href="../styles/Userprofile.css" rel="stylesheet"/>
-<link href="../styles/sidebar.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="../styles/global.css" rel="stylesheet"/></head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTrack Pro - Profile</title>
+    <link rel="stylesheet" href="../styles/Userprofile.css">
+</head>
 <body>
     <div class="layout-wrapper">
         <!-- SIDEBAR -->
@@ -20,11 +29,11 @@
                 FitTrack Pro
             </div>
             <nav class="nav-links">
-                <a href="#" class="active">
+                <a href="Userprofile.php" class="active">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                     Overview
                 </a>
-                <a href="Exerciselibrary.html">
+                <a href="../html/Exerciselibrary.html">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
                     Exercises
                 </a>
@@ -36,9 +45,13 @@
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                     Analytics
                 </a>
-                <a href="EliteCoaches.html">
+                <a href="../html/EliteCoaches.html">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                     Coach
+                </a>
+                <a href="logout.php" style="margin-top: 20px; color: #ef4444;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    Logout
                 </a>
             </nav>
             <div class="sidebar-bottom">
@@ -53,114 +66,62 @@
             </div>
         </aside>
 
-<!-- MAIN CONTENT -->
-<main class="main-content">
-<header class="page-header">
-<div class="header-titles">
-<h1>Profile</h1>
-<p>Manage your athlete profile and goals.</p>
-</div>
-<div class="header-actions">
-<button class="btn-cancel">Cancel</button>
-<button class="btn-save">Save Changes</button>
-</div>
-</header>
-<div class="dashboard-grid">
-<!-- LEFT COLUMN -->
-<div class="grid-col-left">
-<!-- Profile Card -->
-<div class="card profile-card fade-in-up" style="animation-delay: 0.1s">
-<div class="avatar-wrapper">
-<img alt="Sarah Jenkins" src="../assets/media/02e365b6-a962-484a-b83a-bfc51fd522d5.png"/>
-<button aria-label="Edit avatar" class="edit-avatar">
-<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-</button>
-</div>
-<h2>Sarah Jenkins</h2>
-<p class="membership-tier">Elite Member</p>
-<div class="streak-badge">
-<span class="dot pulse"></span> ACTIVE STREAK: 14 DAYS
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <header class="page-header">
+                <div class="header-titles">
+                    <h1>Profile</h1>
+                    <p>Manage your athlete profile and goals.</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-cancel">Cancel</button>
+                    <button class="btn-save">Save Changes</button>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- LEFT COLUMN -->
+                <div class="grid-col-left">
+                    <!-- Profile Card -->
+                    <div class="card profile-card fade-in-up" style="animation-delay: 0.1s">
+                        <div class="avatar-wrapper">
+                            <img src="../assets/media/02e365b6-a962-484a-b83a-bfc51fd522d5.png" alt="<?php echo htmlspecialchars($userName); ?>">
+                            <button class="edit-avatar" aria-label="Edit avatar">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                            </button>
                         </div>
-</div>
-<!-- Personal Details -->
-<div class="card details-card fade-in-up" style="animation-delay: 0.2s">
-<h3>Personal Details</h3>
-<form>
-<div class="input-group">
-<label>EMAIL</label>
-<input readonly="" type="email" value="sarah.j@example.com"/>
-</div>
-<div class="row">
-<div class="input-group half">
-<label>HEIGHT</label>
-<div class="input-with-unit">
-<input type="number" value="175"/>
-<span class="unit">cm</span>
-</div>
-</div>
-<div class="input-group half">
-<label>WEIGHT</label>
-<div class="input-with-unit">
-<input type="number" value="68"/>
-<span class="unit">kg</span>
-</div>
-</div>
-</div>
-</form>
-</div>
-</div>
-<!-- RIGHT COLUMN -->
-<div class="grid-col-right">
-<div class="section-title fade-in-up" style="animation-delay: 0.3s">
-<img alt="Focus" class="icon" src="../assets/media/e8df88e4-780b-4e88-a504-d61dd4b26347.png"/> Current Focus
+                        <h2><?php echo htmlspecialchars($userName); ?></h2>
+                        <p class="membership-tier">Elite Member</p>
+                        <div class="streak-badge">
+                            <span class="dot pulse"></span> ACTIVE STREAK: 14 DAYS
+                        </div>
                     </div>
-<div class="focus-cards fade-in-up" style="animation-delay: 0.4s">
-<!-- Active Focus -->
-<div class="card focus-card active">
-<div class="active-badge">ACTIVE</div>
-<div class="focus-header">
-<div class="focus-icon-circle blue">
-<img alt="Marathon Prep" src="../assets/media/528ac074-5989-4b62-a559-9985555ea795.png"/>
-</div>
-<div class="focus-info">
-<h4>Marathon Prep</h4>
-<p>12 Weeks Remaining</p>
-</div>
-</div>
-<div class="progress-section">
-<div class="progress-labels">
-<span>Progress</span>
-<span class="blue-text">45%</span>
-</div>
-<div class="progress-bar-bg">
-<div class="progress-bar-fill" style="width: 45%;"></div>
-</div>
-</div>
-</div>
-<!-- Secondary Focus -->
-<div class="card focus-card secondary">
-<div class="focus-header">
-<div class="focus-icon-circle gray">
-<img alt="Hypertrophy" src="../assets/media/5dc7e156-427e-456c-b251-797da94d6f9f.png"/>
-</div>
-<div class="focus-info">
-<h4>Hypertrophy</h4>
-<p>Off-season</p>
-</div>
-</div>
-<div class="progress-section">
-<div class="progress-labels">
-<span>Progress</span>
-<span>Hold</span>
-</div>
-<div class="progress-bar-bg">
-<div class="progress-bar-fill gray" style="width: 100%;"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section-title fade-in-up" style="animation-delay: 0.5s">
-<span style="margin-right: 8px;">🏆</span> Trophy Cabinet
+
+                    <!-- Personal Details -->
+                    <div class="card details-card fade-in-up" style="animation-delay: 0.2s">
+                        <h3>Personal Details</h3>
+                        <form>
+                            <div class="input-group">
+                                <label>EMAIL</label>
+                                <input type="email" value="<?php echo htmlspecialchars($userEmail); ?>" readonly>
+                            </div>
+                            <div class="row">
+                                <div class="input-group half">
+                                    <label>HEIGHT</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" value="175">
+                                        <span class="unit">cm</span>
+                                    </div>
+                                </div>
+                                <div class="input-group half">
+                                    <label>WEIGHT</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" value="68">
+                                        <span class="unit">kg</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
 
