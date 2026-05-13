@@ -1,77 +1,99 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Signup</title>
-    <link rel="stylesheet" href="../styles/signup.css" />
-  </head>
-  <body>
-    <div class="main">
-      <div class="picture">
-        <p>
-          Movement is fluid.
-          <br />
-          Data is exact.
-          <span class="colour"></span>
-        </p>
-      </div>
-      <div class="form">
-        <div class="text">
-          <div class="text1">Welcome, Start Your Journey</div>
-          <div class="text12">
-            Join 10,000+ athletes tracking their performance
-          </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IronPulse - Sign Up</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS (Shares login.css) -->
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/login.css">
+</head>
+<body>
+
+    <div class="auth-container">
+        <!-- Left Side: Image/Brand -->
+        <div class="auth-brand">
+            <div class="auth-brand-content">
+                <div class="brand-logo">PERFORMANCE</div>
+                <h1>Start Your Journey.</h1>
+                <p>Join 10,000+ athletes tracking their performance and pushing limits.</p>
+            </div>
         </div>
-        <form action="../php/signup.php" method="POST">
-          <label for="name">Full Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Your full name"
-            required
-          />
-          <label for="email">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="you@example.com"
-            required
-          />
-          <label for="pass">Password</label>
-          <input
-            type="password"
-            id="pass"
-            name="password"
-            placeholder="Create a password"
-            required
-          />
-          <label for="confirm">Confirm Password</label>
-          <input
-            type="password"
-            id="confirm"
-            name="confirm_password"
-            placeholder="Repeat your password"
-            required
-          />
-          <button class="prim-btn" type="submit">Create Account</button>
-          <div class="divider">
-            <span>OR CONTINUE WITH</span>
-          </div>
-          <div class="social-buttons">
-            <button class="social-btn" type="button">
-              <a href="">Google</a>
-            </button>
-            <button class="social-btn" type="button">
-              <a href="">Apple</a>
-            </button>
-          </div>
-          <p class="footer-text">Already an athlete? <a href="./login.html">Login</a></p>
-        </form>
-      </div>
+
+        <!-- Right Side: Form -->
+        <div class="auth-form-wrapper">
+            <div class="auth-form-container card">
+                <h2>Create an account</h2>
+                <p class="auth-subtitle">Get started with your free 14-day trial.</p>
+
+                <form action="../php/signup.php" method="POST" class="auth-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <div class="input-icon-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="name" name="name" placeholder="Sarah Jenkins" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-icon-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" name="email" placeholder="athlete@ironpulse.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pass">Password</label>
+                        <div class="input-icon-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="pass" name="password" placeholder="Create a password" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm">Confirm Password</label>
+                        <div class="input-icon-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="confirm" name="confirm_password" placeholder="Repeat your password" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary auth-btn">
+                        Create Account <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <div class="auth-divider">
+                    <span>OR SIGN UP WITH</span>
+                </div>
+
+                <div class="social-login">
+                    <button type="button" class="btn-social">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
+                        Google
+                    </button>
+                    <button type="button" class="btn-social">
+                        <i class="fab fa-apple"></i>
+                        Apple
+                    </button>
+                </div>
+
+                <p class="auth-footer-text">
+                    Already an athlete? <a href="login.html">Log in</a>
+                </p>
+            </div>
+        </div>
     </div>
-    <script src="../js/signup.js"></script>
-  </body>
+
+</body>
 </html>

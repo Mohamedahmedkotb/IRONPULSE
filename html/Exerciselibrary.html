@@ -1,74 +1,74 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/Exerciselibrary.css">
-    <title>Document</title>
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="../styles/Exerciselibrary.css" rel="stylesheet"/>
+<title>Document</title>
+<link href="../styles/sidebar.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="../styles/global.css" rel="stylesheet"/></head>
 <body>
+<div class="app-container">
+<app-sidebar></app-sidebar>
+<main class="main-content">
 <div class="main">
-    <div class="herosection">
- <div class="text0">       
-    <p class="text1"> Exercise Library </p>
-    <p class="text2"> Master your movements, Browse 500+ precision-tracked exercises  </p>
-    </div>
-    <button class="customexercise"> + Custom Exercise   </button>
+<div class="herosection">
+<div class="text0">
+<p class="text1"> Exercise Library </p>
+<p class="text2"> Master your movements, Browse 500+ precision-tracked exercises  </p>
+</div>
+<button class="customexercise"> + Custom Exercise   </button>
 </div>
 <div class="form">
 <form>
-<div class="searchexercise"> 
-        <input type="text" class="search-bar" placeholder="Search exercises,muscles, or equipment... " >  
+<div class="searchexercise">
+<input class="search-bar" placeholder="Search exercises,muscles, or equipment... " type="text"/>
 </div>
 <div class="filters">
-        <button class="filter-btn">Chest</button>
-        <button class="filter-btn">Back</button>
-        <button class="filter-btn">Legs</button>
-        <button class="filter-btn">Core</button>
-        <button class="more-filters-btn">more-filters</button>
+<button class="filter-btn">Chest</button>
+<button class="filter-btn">Back</button>
+<button class="filter-btn">Legs</button>
+<button class="filter-btn">Core</button>
+<button class="more-filters-btn">more-filters</button>
 </div>
 <div class="Exercises">
 <div class="Bench-press">
-     <h2 class="card-titleb">Barbell Bench Press</h2>
-    <img src="../assets/media/bench_press.png" > 
-    <div class="tags">
-          <span class="tag">Push</span>
-          <span class="tag">Compound</span>
-    </div>
+<h2 class="card-titleb">Barbell Bench Press</h2>
+<img src="../assets/media/bench_press.png"/>
+<div class="tags">
+<span class="tag">Push</span>
+<span class="tag">Compound</span>
+</div>
 </div>
 <div class="squats">
-    <h2 class="card-titles"> Squats</h2>
-    <img src="../assets/media/squats.png" >
-        <div class="tags">
-          <span class="tag">Push</span>
-          <span class="tag">Compound</span>
-        </div>
-</div>
-<div class="bodyweight"> 
-    <h2 class="card-titleBW"> Ring Muscle Up</h2>
-    <img src="../assets/media/muscle_up.png">
-     <div class="tags">
-          <span class="tag">Pull/Push</span>
-          <span class="tag">Calisthenics</span>
-    </div>
+<h2 class="card-titles"> Squats</h2>
+<img src="../assets/media/squats.png"/>
+<div class="tags">
+<span class="tag">Push</span>
+<span class="tag">Compound</span>
 </div>
 </div>
-
+<div class="bodyweight">
+<h2 class="card-titleBW"> Ring Muscle Up</h2>
+<img src="../assets/media/muscle_up.png"/>
+<div class="tags">
+<span class="tag">Pull/Push</span>
+<span class="tag">Calisthenics</span>
 </div>
-</form>
- <div class="btn">
-    <button class="btn-load-more">Load More Exercises</button>
 </div>
 </div>
+</form></div>
 
-
-
-
-
-
-
-
+<div class="btn">
+<button class="btn-load-more">Load More Exercises</button>
 </div>
-    <script src="../js/Exerciselibrary.js"></script>
+</div>
+</main></div>
+<script src="../js/Exerciselibrary.js"></script>
+
+
+<script src="../js/sidebar.js"></script>
 </body>
 </html>

@@ -1,24 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');
 
-:root {
-  --bg-dark: #121826;
-  --bg-main: #f8fafc;
-  
-  --primary: #3b82f6;
-  --primary-hover: #2563eb;
-  --primary-light: #e0f2fe;
-  
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --text-light: #94a3b8;
-  
-  --orange: #f59e0b;
-  --red: #ef4444;
-  
-  --card-bg: #ffffff;
-  --border-color: #e2e8f0;
-}
+
+
+
 
 * {
   box-sizing: border-box;
