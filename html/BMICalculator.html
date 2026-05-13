@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTrackPro BMI Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles/BMICalculator.css">
+
+    <script src="https://kit.fontawesome.com/7a4b62b0a4.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>FitTrackPro</h2>
+        </div>
+
+        <div class="profile-box">
+            <img src="https://i.pravatar.cc/100" alt="profile">
+            <div>
+                <h3>Performance</h3>
+                <span>Elite Status</span>
+            </div>
+        </div>
+
+        <ul class="menu">
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-border-all"></i>
+                    Overview
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-dumbbell"></i>
+                    Exercises
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="#">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    History
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Analytics
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-headset"></i>
+                    Coach
+                </a>
+            </li>
+        </ul>
+
+        <button class="session-btn">Start Session</button>
+
+    </aside>
+
+
+    <main class="main-content">
+
+    
+        <header class="topbar">
+
+            <nav>
+                <a href="#">Dashboard</a>
+                <a href="#">Workouts</a>
+                <a href="#" class="active-link">Nutrition</a>
+                <a href="#">Community</a>
+                <a href="#">Settings</a>
+            </nav>
+
+            <div class="topbar-right">
+
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+
+                <button class="pro-btn">GoPro</button>
+
+                <img class="avatar" src="https://i.pravatar.cc/50" alt="avatar">
+
+            </div>
+
+        </header>
+
+
+        
+        <section class="content">
+
+            <div class="heading">
+                <h1>BMI Calculator</h1>
+                <p>Precision body mass index tracking & analysis.</p>
+            </div>
+
+
+            <div class="grid-layout">
+
+                <!-- PARAMETERS -->
+                <div class="card parameters-card">
+
+                    <div class="card-title">
+                        <i class="fa-solid fa-sliders"></i>
+                        <h3>Parameters</h3>
+                    </div>
+
+                    <div class="gender-box">
+                        <label>Gender</label>
+
+                        <div class="gender-buttons">
+                            <button class="gender-btn active-gender">
+                                <i class="fa-solid fa-mars"></i>
+                                Male
+                            </button>
+
+                            <button class="gender-btn">
+                                <i class="fa-solid fa-venus"></i>
+                                Female
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label>Height</label>
+                            <span id="heightValue">175 cm</span>
+                        </div>
+
+                        <input type="range" min="100" max="250" value="175" id="heightSlider">
+
+                        <div class="range-values">
+                            <span>100cm</span>
+                            <span>250cm</span>
+                        </div>
+                    </div>
+
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label>Weight</label>
+                            <span id="weightLabel">70 kg</span>
+                        </div>
+
+                        <div class="number-box">
+                            <button id="minusWeight">-</button>
+                            <input type="number" value="70" id="weightInput">
+                            <button id="plusWeight">+</button>
+                        </div>
+                    </div>
+
+
+                    <div class="input-group">
+                        <label>Age</label>
+
+                        <input type="number" value="28" class="age-input" id="ageInput">
+                    </div>
+
+                    <button class="calculate-btn" id="calculateBtn">
+                        Calculate BMI
+                    </button>
+
+                </div>
+
+
+                
+                <div class="middle-column">
+
+                    <div class="card bmi-card">
+
+                        <h4>CURRENT BMI</h4>
+
+                        <div class="circle-wrapper">
+                            <div class="circle">
+                                <div class="inner-circle">
+                                    <h2 id="bmiResult">22.8</h2>
+                                    <span id="bmiStatus">Normal</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="legend">
+                            <span><span class="dot blue"></span> &lt;18.5</span>
+                            <span><span class="dot green"></span> 18.5 - 24.9</span>
+                            <span><span class="dot orange"></span> 25 - 29.9</span>
+                            <span><span class="dot red"></span> 30+</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="card insights-card">
+
+                        <div class="card-title">
+                            <i class="fa-regular fa-lightbulb"></i>
+                            <h3>Kinetic Insights</h3>
+                        </div>
+
+                        <div class="insights-grid">
+
+                            <div class="insight-box">
+                                <div class="icon green-bg">
+                                    <i class="fa-solid fa-dumbbell"></i>
+                                </div>
+
+                                <h4>Maintain Balance</h4>
+
+                                <p>
+                                    Your BMI is in the healthy range. Continue your current balance focusing on lean proteins and complex carbs.
+                                </p>
+                            </div>
+
+
+                            <div class="insight-box">
+                                <div class="icon blue-bg">
+                                    <i class="fa-solid fa-person-running"></i>
+                                </div>
+
+                                <h4>Performance Focus</h4>
+
+                                <p>
+                                    With a stable mass, you can pivot focus to athletic goals like increased endurance or targeted hypertrophy.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="right-column">
+
+                    <div class="card small-card">
+                        <p>Ideal Weight Range</p>
+
+                        <h2>56.5 - 76.2 <span>kg</span></h2>
+
+                        <small>Based on height 175cm</small>
+                    </div>
+
+
+                    <div class="card trend-card">
+                        <h4>Body Mass Trend</h4>
+
+                        <div class="bars">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar tall"></div>
+                            <div class="bar taller"></div>
+                        </div>
+
+                        <div class="months">
+                            <span>Jan</span>
+                            <span>Now</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer class="footer">
+            <p>© 2024 FITTRACK PRO. KINETIC PRECISION PERFORMANCE.</p>
+
+            <div class="footer-links">
+                <a href="#">PRIVACY</a>
+                <a href="#">TERMS</a>
+                <a href="#">SUPPORT</a>
+                <a href="#">API</a>
+            </div>
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+```
+
+---
+
+
