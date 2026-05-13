@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+// Redirect to login if not authenticated
+if (!isset($_SESSION['email'])) {
+    header('Location: ../html/login.html');
+    exit;
+}
+
+$userName = $_SESSION['name'] ?? 'Athlete';
+$userEmail = $_SESSION['email'] ?? '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,11 +29,11 @@
                 FitTrack Pro
             </div>
             <nav class="nav-links">
-                <a href="#" class="active">
+                <a href="Userprofile.php" class="active">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                     Overview
                 </a>
-                <a href="Exerciselibrary.html">
+                <a href="../html/Exerciselibrary.html">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
                     Exercises
                 </a>
@@ -33,9 +45,13 @@
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                     Analytics
                 </a>
-                <a href="EliteCoaches.html">
+                <a href="../html/EliteCoaches.html">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                     Coach
+                </a>
+                <a href="logout.php" style="margin-top: 20px; color: #ef4444;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    Logout
                 </a>
             </nav>
             <div class="sidebar-bottom">
@@ -69,12 +85,12 @@
                     <!-- Profile Card -->
                     <div class="card profile-card fade-in-up" style="animation-delay: 0.1s">
                         <div class="avatar-wrapper">
-                            <img src="../assets/media/02e365b6-a962-484a-b83a-bfc51fd522d5.png" alt="Sarah Jenkins">
+                            <img src="../assets/media/02e365b6-a962-484a-b83a-bfc51fd522d5.png" alt="<?php echo htmlspecialchars($userName); ?>">
                             <button class="edit-avatar" aria-label="Edit avatar">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                             </button>
                         </div>
-                        <h2>Sarah Jenkins</h2>
+                        <h2><?php echo htmlspecialchars($userName); ?></h2>
                         <p class="membership-tier">Elite Member</p>
                         <div class="streak-badge">
                             <span class="dot pulse"></span> ACTIVE STREAK: 14 DAYS
@@ -87,7 +103,7 @@
                         <form>
                             <div class="input-group">
                                 <label>EMAIL</label>
-                                <input type="email" value="sarah.j@example.com" readonly>
+                                <input type="email" value="<?php echo htmlspecialchars($userEmail); ?>" readonly>
                             </div>
                             <div class="row">
                                 <div class="input-group half">
