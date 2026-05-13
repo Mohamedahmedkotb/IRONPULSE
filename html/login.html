@@ -7,6 +7,43 @@
     <link rel="stylesheet" href="../styles/login.css">
 </head>
 <body>
+
+    <!-- SUCCESS TOAST (shown after signup redirect) -->
+    <div id="successToast" style="
+        display: none;
+        position: fixed;
+        top: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ecfdf5;
+        border: 1.5px solid #6ee7b7;
+        color: #065f46;
+        padding: 14px 24px;
+        border-radius: 12px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    ">
+        <span style="font-size:1.2rem">✅</span>
+        Account created! Please log in.
+        <button onclick="this.parentElement.style.display='none'" style="
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #065f46;
+            font-size: 1.1rem;
+            margin-left: 8px;
+            line-height:1;
+        ">&times;</button>
+    </div>
+
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="logo">
@@ -107,5 +144,24 @@
         </div>
     </footer>
     <script src="../js/login.js"></script>
+    <script>
+        // Show success toast if redirected from signup
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('registered') === '1') {
+                const toast = document.getElementById('successToast');
+                toast.style.display = 'flex';
+                // Fade in
+                requestAnimationFrame(() => { toast.style.opacity = '1'; });
+                // Auto-dismiss after 5 s
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    setTimeout(() => { toast.style.display = 'none'; }, 400);
+                }, 5000);
+                // Clean URL without reload
+                history.replaceState(null, '', window.location.pathname);
+            }
+        })();
+    </script>
 </body>
 </html>
