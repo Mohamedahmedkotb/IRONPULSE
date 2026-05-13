@@ -18,9 +18,6 @@ const circle = document.querySelector('.circle');
 
 
 
-/* =========================
-   GENDER BUTTONS
-========================= */
 
 genderButtons.forEach(button => {
 
@@ -72,10 +69,6 @@ dashboardLinks.forEach(link => {
 
 
 
-/* =========================
-   HEIGHT SLIDER
-========================= */
-
 heightSlider.addEventListener('input', () => {
 
     heightValue.textContent = `${heightSlider.value} cm`;
@@ -87,10 +80,6 @@ heightSlider.addEventListener('input', () => {
 });
 
 
-
-/* =========================
-   WEIGHT CONTROLS
-========================= */
 
 plusWeight.addEventListener('click', () => {
 
@@ -145,9 +134,6 @@ function updateWeightLabel() {
 
 
 
-/* =========================
-   BMI CALCULATION
-========================= */
 
 calculateBtn.addEventListener('click', calculateBMI);
 
@@ -219,9 +205,6 @@ function calculateBMI() {
 
 
 
-/* =========================
-   BMI NUMBER ANIMATION
-========================= */
 
 function animateBMI(target) {
 
@@ -249,10 +232,6 @@ function animateBMI(target) {
 
 
 
-/* =========================
-   IDEAL WEIGHT
-========================= */
-
 function updateIdealWeight() {
 
     const height = heightSlider.value / 100;
@@ -269,9 +248,6 @@ function updateIdealWeight() {
 
 
 
-/* =========================
-   BMI CIRCLE ANIMATION
-========================= */
 
 function updateCircle(bmi) {
 
@@ -288,9 +264,6 @@ function updateCircle(bmi) {
 
 
 
-/* =========================
-   LOCAL STORAGE
-========================= */
 
 function saveBMIHistory(bmi) {
 
@@ -311,9 +284,6 @@ function saveBMIHistory(bmi) {
 
 
 
-/* =========================
-   ENTER KEY SUPPORT
-========================= */
 
 document.addEventListener('keydown', (e) => {
 
@@ -327,9 +297,6 @@ document.addEventListener('keydown', (e) => {
 
 
 
-/* =========================
-   INITIAL LOAD
-========================= */
 
 updateWeightLabel();
 
