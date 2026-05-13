@@ -1,210 +1,58 @@
 <!DOCTYPE html>
-
 <html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>FitTrack Pro - Routine Builder</title>
-<link href="../styles/routinebuilder.css" rel="stylesheet"/>
-<link href="../styles/sidebar.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="../styles/global.css" rel="stylesheet"/></head>
-<body>
-<div class="app-container">
-<app-sidebar></app-sidebar>
-<main class="main-content">
-<div class="">
-<!-- SIDEBAR -->
-
-<!-- MAIN CONTENT -->
-<div class="content-wrapper">
-<main class="main-content">
-<header class="page-header">
-<div class="header-titles fade-in-up">
-<span class="eyebrow">ROUTINE BUILDER</span>
-<h1>Design Your Protocol</h1>
-</div>
-<div class="header-tabs fade-in-up" style="animation-delay: 0.1s">
-<button class="tab active">Build New</button>
-<button class="tab">Saved Routines</button>
-<button class="tab">Templates</button>
-</div>
-</header>
-<div class="dashboard-grid">
-<!-- LEFT COLUMN -->
-<div class="grid-col-left">
-<!-- Routine Details -->
-<div class="card routine-details fade-in-up" style="animation-delay: 0.2s">
-<div class="card-header">
-<h2>Routine Details</h2>
-<p>Define the core parameters of this workout block.</p>
-</div>
-<div class="form-group">
-<label for="routine-name">ROUTINE NAME</label>
-<input id="routine-name" placeholder="e.g., Hypertrophy Push Day A" type="text"/>
-</div>
-<div class="form-group">
-<label>TARGET DAYS</label>
-<div class="day-pills">
-<button class="day-pill active">Mon</button>
-<button class="day-pill">Tue</button>
-<button class="day-pill active">Wed</button>
-<button class="day-pill">Thu</button>
-<button class="day-pill active">Fri</button>
-<button class="day-pill">Sat</button>
-<button class="day-pill">Sun</button>
-</div>
-</div>
-</div>
-<!-- Exercise Block -->
-<div class="card exercise-block fade-in-up" style="animation-delay: 0.3s">
-<div class="exercise-header">
-<h2>Exercise Block</h2>
-<span class="badge">3 Movements</span>
-</div>
-<div class="exercise-list">
-<!-- Exercise 1 -->
-<div class="exercise-item">
-<div class="exercise-info">
-<div class="exercise-thumb">
-<svg fill="none" stroke="#6b7280" stroke-width="2" viewbox="0 0 24 24"><path d="M2 12h20M6 12v-2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"></path></svg>
-</div>
-<div class="exercise-text">
-<h3>Barbell Bench Press</h3>
-<p>Chest, Triceps â€¢ Barbell</p>
-</div>
-</div>
-<div class="exercise-inputs">
-<div class="input-stat">
-<span>Sets</span>
-<input type="text" value="4"/>
-</div>
-<div class="input-stat">
-<span>Reps</span>
-<input type="text" value="8-10"/>
-</div>
-<div class="input-stat">
-<span>Rest</span>
-<input type="text" value="90s"/>
-</div>
-</div>
-</div>
-<!-- Exercise 2 -->
-<div class="exercise-item">
-<div class="exercise-info">
-<div class="exercise-thumb">
-<svg fill="none" stroke="#6b7280" stroke-width="2" viewbox="0 0 24 24"><path d="M6 4v16M18 4v16M2 8h4M2 16h4M18 8h4M18 16h4"></path></svg>
-</div>
-<div class="exercise-text">
-<h3>Incline Dumbbell Press</h3>
-<p>Upper Chest â€¢ Dumbbell</p>
-</div>
-</div>
-<div class="exercise-inputs">
-<div class="input-stat">
-<span>Sets</span>
-<input type="text" value="3"/>
-</div>
-<div class="input-stat">
-<span>Reps</span>
-<input type="text" value="10-12"/>
-</div>
-<div class="input-stat">
-<span>Rest</span>
-<input type="text" value="90s"/>
-</div>
-</div>
-</div>
-</div>
-<button class="add-exercise-btn">
-<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="16"></line><line x1="8" x2="16" y1="12" y2="12"></line></svg>
-                                Add Exercise
-                            </button>
-</div>
-<!-- Action Buttons -->
-<div class="action-buttons fade-in-up" style="animation-delay: 0.4s">
-<button class="btn-secondary">Save Draft</button>
-<button class="btn-primary">
-<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                Publish Routine
-                            </button>
-</div>
-</div>
-<!-- RIGHT COLUMN -->
-<div class="grid-col-right">
-<!-- Movement Library -->
-<div class="card movement-library fade-in-up" style="animation-delay: 0.5s">
-<h2>Movement Library</h2>
-<div class="search-box">
-<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
-<input placeholder="Search exercises..." type="text"/>
-</div>
-<div class="tags-container">
-<span class="tag">Chest</span>
-<span class="tag">Back</span>
-<span class="tag">Legs</span>
-<span class="tag">Core</span>
-</div>
-</div>
-<!-- Recent Templates -->
-<div class="card recent-templates fade-in-up" style="animation-delay: 0.6s">
-<div class="card-header-flex">
-<h2>Recent Templates</h2>
-<a class="view-all" href="#">VIEW ALL</a>
-</div>
-<div class="template-list">
-<div class="template-item">
-<div class="template-info">
-<h4>Pull Day B (Heavy)</h4>
-<p>6 Exercises â€¢ 65 Mins</p>
-</div>
-<svg class="chevron" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="9 18 15 12 9 6"></polyline></svg>
-</div>
-<div class="template-item">
-<div class="template-info">
-<h4>Legs Focus (Quad)</h4>
-<p>5 Exercises â€¢ 55 Mins</p>
-</div>
-<svg class="chevron" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="9 18 15 12 9 6"></polyline></svg>
-</div>
-</div>
-</div>
-<!-- Recommendation -->
-<div class="card recommendation-card fade-in-up" style="animation-delay: 0.7s">
-<button class="close-btn">
-<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="14"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg>
-</button>
-<div class="recommendation-content">
-<div class="icon-bulb">
-<svg fill="currentColor" height="20" stroke="none" viewbox="0 0 24 24" width="20"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7zM9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1z"></path></svg>
-</div>
-<div class="text">
-<h4>Volume Recommendation</h4>
-<p>For hypertrophy, aim for 10-20 working sets per muscle group per week. This routine currently assigns 7 sets to Chest.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</main>
-<!-- FOOTER -->
-<footer class="footer">
-<div class="footer-left">
-<span class="footer-logo">FitTrack Pro</span>
-<span class="footer-text">Â© 2024 FITTRACK PRO. KINETIC PRECISION PERFORMANCE.</span>
-</div>
-<div class="footer-right">
-<a href="#">PRIVACY</a>
-<a href="#">TERMS</a>
-<a href="#">SUPPORT</a>
-<a href="#">API</a>
-</div>
-</footer>
-</div>
-</div>
-<script src="../js/routinebuilder.js"></script>
-</main>
-</div>
-<script src="../js/sidebar.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Routine builder — Ironpulse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="../styles/global.css" />
+  </head>
+  <body data-shell="dashboard" data-page="routine" data-auth-required="true">
+    <div class="app-shell">
+      <aside class="app-sidebar" id="app-sidebar"></aside>
+      <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+      <div class="app-main-wrap">
+        <header class="app-topbar">
+          <button type="button" class="app-topbar__menu" id="sidebar-toggle" aria-label="Open navigation"><i class="fas fa-bars"></i></button>
+          <div id="app-navbar" class="ft-flex" style="flex: 1; min-width: 0"></div>
+        </header>
+        <main class="app-main ft-page-enter">
+          <div class="ft-flex-between" style="margin-bottom: var(--space-5); flex-wrap: wrap; gap: 12px">
+            <div>
+              <h1 class="ft-section-title" style="font-size: 1.75rem">Routine builder</h1>
+              <p class="ft-muted">Drag blocks, tune sets/reps, save to your library.</p>
+            </div>
+            <div class="ft-flex" style="gap: 10px">
+              <a href="savedRoutine.html" class="ft-btn ft-btn--secondary">Saved routines</a>
+              <button type="button" class="ft-btn ft-btn--primary" id="rb-save"><i class="fas fa-floppy-disk"></i> Save routine</button>
+            </div>
+          </div>
+          <div class="rb-layout">
+            <div>
+              <div class="ft-card" style="margin-bottom: var(--space-4)">
+                <label class="ft-label">Routine name</label>
+                <input class="ft-input" id="rb-title" value="Upper A — Strength" />
+                <label class="ft-label" style="margin-top: 12px">Description</label>
+                <textarea class="ft-input" id="rb-desc" rows="2">Heavy compounds + accessories.</textarea>
+              </div>
+              <div id="rb-list"></div>
+              <button type="button" class="ft-btn ft-btn--secondary ft-btn--block" id="rb-add-empty"><i class="fas fa-plus"></i> Add empty block</button>
+            </div>
+            <aside class="ft-card rb-side">
+              <h3 class="ft-section-title" style="font-size: 1rem; margin-bottom: 12px">Exercise picker</h3>
+              <input type="search" class="ft-input" id="rb-lib-q" placeholder="Filter…" style="margin-bottom: 12px" />
+              <div class="rb-side-list" id="rb-lib"></div>
+            </aside>
+          </div>
+        </main>
+        <div id="app-footer"></div>
+      </div>
+    </div>
+    <script type="module" src="../js/layout.js"></script>
+    <script type="module" src="../js/pages/routinebuilder.js"></script>
+  </body>
 </html>
+

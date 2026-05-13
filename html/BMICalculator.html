@@ -1,298 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMICalculator</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="../styles/BMICalculator.css">
-
-    <script src="https://kit.fontawesome.com/7a4b62b0a4.js" crossorigin="anonymous"></script>
-</head>
-<body>
-
-<div class="dashboard">
-    <aside class="sidebar">
-
-        <div class="logo">
-            <h2>FitTrackPro</h2>
-        </div>
-
-        <div class="profile-box">
-            <img src="../assets/media/02e365b6-a962-484a-b83a-bfc51fd522d5.png" alt="profile">
-            <div>
-                <h3>Performance</h3>
-                <span>Elite Status</span>
-            </div>
-        </div>
-
-        <ul class="menu">
-            <li>
-                <a href="javascript:void(0)"></a>
-                    <i class="fa-solid fa-border-all"></i>
-                    Overview
-                </a>
-            </li>
-
-            <li>
-                <a href="javascript:void(0)">
-                    <i class="fa-solid fa-dumbbell"></i>
-                    Exercises
-                </a>
-            </li>
-
-            <li class="active">
-                <a href="javascript:void(0)">
-                    <i class="fa-solid fa-clock-rotate-left"></i>
-                    History
-                </a>
-            </li>
-
-            <li>
-                <a href="javascript:void(0)">
-                    <i class="fa-solid fa-chart-line"></i>
-                    Analytics
-                </a>
-            </li>
-
-            <li>
-                <a href="javascript:void(0)">
-                    <i class="fa-solid fa-headset"></i>
-                    Coach
-                </a>
-            </li>
-        </ul>
-
-
-    </aside>
-
-
-    <main class="main-content">
-
-    
-        <header class="topbar">
-
-            <nav>
-                <a href="#">Dashboard</a>
-                <a href="#">Workouts</a>
-                <a href="#" class="active-link">Nutrition</a>
-                <a href="#">Community</a>
-                <a href="#">Settings</a>
-            </nav>
-
-            <div class="topbar-right">
-
-                <div class="search-box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Search...">
-                </div>
-
-
-                <img class="avatar" src="../assets/media/02e365b6-a962-484a-b83a-bfc51fd522d5.png" alt="avatar">
-
-            </div>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI calculator — Ironpulse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="../styles/global.css" />
+  </head>
+  <body data-shell="dashboard" data-page="bmi" data-auth-required="true">
+    <div class="app-shell">
+      <aside class="app-sidebar" id="app-sidebar"></aside>
+      <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+      <div class="app-main-wrap">
+        <header class="app-topbar">
+          <button type="button" class="app-topbar__menu" id="sidebar-toggle" aria-label="Open navigation"><i class="fas fa-bars"></i></button>
+          <div id="app-navbar" class="ft-flex" style="flex: 1; min-width: 0"></div>
         </header>
-
-
-        
-        <section class="content">
-
-            <div class="heading">
-                <h1>BMI Calculator</h1>
-                <p>Precision body mass index tracking & analysis.</p>
-            </div>
-
-
-            <div class="grid-layout">
-
-                <div class="card parameters-card">
-
-                    <div class="card-title">
-                        <i class="fa-solid fa-sliders"></i>
-                        <h3>Parameters</h3>
-                    </div>
-
-                    <div class="gender-box">
-                        <label>Gender</label>
-
-                        <div class="gender-buttons">
-                            <button class="gender-btn active-gender">
-                                <i class="fa-solid fa-mars"></i>
-                                Male
-                            </button>
-
-                            <button class="gender-btn">
-                                <i class="fa-solid fa-venus"></i>
-                                Female
-                            </button>
-                        </div>
-                    </div>
-
-
-                    <div class="input-group">
-                        <div class="label-row">
-                            <label>Height</label>
-                            <span id="heightValue">175 cm</span>
-                        </div>
-
-                        <input type="range" min="100" max="250" value="175" id="heightSlider">
-
-                        <div class="range-values">
-                            <span>100cm</span>
-                            <span>250cm</span>
-                        </div>
-                    </div>
-
-
-                    <div class="input-group">
-                        <div class="label-row">
-                            <label>Weight</label>
-                            <span id="weightLabel">70 kg</span>
-                        </div>
-
-                        <div class="number-box">
-                            <button id="minusWeight">-</button>
-                            <input type="number" value="70" id="weightInput">
-                            <button id="plusWeight">+</button>
-                        </div>
-                    </div>
-
-
-                    <div class="input-group">
-                        <label>Age</label>
-
-                        <input type="number" value="28" class="age-input" id="ageInput">
-                    </div>
-
-                    <button class="calculate-btn" id="calculateBtn">
-                        Calculate BMI
-                    </button>
-
+        <main class="app-main ft-page-enter">
+          <h1 class="ft-section-title" style="font-size: 1.75rem; margin-bottom: 8px">BMI calculator</h1>
+          <p class="ft-muted" style="margin-bottom: var(--space-6)">Estimate body mass index and see category guidance.</p>
+          <div class="bmi-layout">
+            <div class="ft-card">
+              <h2 class="ft-section-title" style="font-size: 1.1rem; margin-bottom: var(--space-5)">Parameters</h2>
+              <div style="margin-bottom: var(--space-4)">
+                <span class="ft-label">Gender</span>
+                <div class="bmi-toggle" role="group" aria-label="Gender">
+                  <button type="button" class="is-active" data-g="f">Female</button>
+                  <button type="button" data-g="m">Male</button>
                 </div>
-
-
-                
-                <div class="middle-column">
-
-                    <div class="card bmi-card">
-
-                        <h4>CURRENT BMI</h4>
-
-                        <div class="circle-wrapper">
-                            <div class="circle">
-                                <div class="inner-circle">
-                                    <h2 id="bmiResult">22.8</h2>
-                                    <span id="bmiStatus">Normal</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="legend">
-                            <span><span class="dot blue"></span> &lt;18.5</span>
-                            <span><span class="dot green"></span> 18.5 - 24.9</span>
-                            <span><span class="dot orange"></span> 25 - 29.9</span>
-                            <span><span class="dot red"></span> 30+</span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="card insights-card">
-
-                        <div class="card-title">
-                            <i class="fa-regular fa-lightbulb"></i>
-                            <h3>Kinetic Insights</h3>
-                        </div>
-
-                        <div class="insights-grid">
-
-                            <div class="insight-box">
-                                <div class="icon green-bg">
-                                    <i class="fa-solid fa-dumbbell"></i>
-                                </div>
-
-                                <h4>Maintain Balance</h4>
-
-                                <p>
-                                    Your BMI is in the healthy range. Continue your current balance focusing on lean proteins and complex carbs.
-                                </p>
-                            </div>
-
-
-                            <div class="insight-box">
-                                <div class="icon blue-bg">
-                                    <i class="fa-solid fa-person-running"></i>
-                                </div>
-
-                                <h4>Performance Focus</h4>
-
-                                <p>
-                                    With a stable mass, you can pivot focus to athletic goals like increased endurance or targeted hypertrophy.
-                                </p>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="right-column">
-
-                    <div class="card small-card">
-                        <p>Ideal Weight Range</p>
-
-                        <h2>56.5 - 76.2 <span>kg</span></h2>
-
-                        <small>Based on height 175cm</small>
-                    </div>
-
-
-                    <div class="card trend-card">
-                        <h4>Body Mass Trend</h4>
-
-                        <div class="bars">
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar tall"></div>
-                            <div class="bar taller"></div>
-                        </div>
-
-                        <div class="months">
-                            <span>Jan</span>
-                            <span>Now</span>
-                        </div>
-                    </div>
-
-                </div>
-
+              </div>
+              <div style="margin-bottom: var(--space-4)">
+                <label class="ft-label" for="bmi-age">Age</label>
+                <input class="ft-input" type="number" id="bmi-age" min="16" max="100" value="28" />
+              </div>
+              <div style="margin-bottom: var(--space-4)">
+                <label class="ft-label" for="bmi-h">Height (cm): <span id="bmi-hv">175</span></label>
+                <input class="ft-input" type="range" id="bmi-h" min="140" max="210" value="175" />
+                <input class="ft-input" type="number" id="bmi-hn" value="175" style="margin-top: 8px" />
+              </div>
+              <div style="margin-bottom: var(--space-5)">
+                <label class="ft-label" for="bmi-w">Weight (kg): <span id="bmi-wv">72</span></label>
+                <input class="ft-input" type="range" id="bmi-w" min="40" max="160" value="72" />
+                <input class="ft-input" type="number" id="bmi-wn" value="72" style="margin-top: 8px" />
+              </div>
+              <button type="button" class="ft-btn ft-btn--primary ft-btn--block ft-btn--lg" id="bmi-calc">Calculate BMI</button>
             </div>
-
-        </section>
-
-
-        <footer class="footer">
-            <p>Â© 2024 FITTRACK PRO. KINETIC PRECISION PERFORMANCE.</p>
-
-            <div class="footer-links">
-                <a href="#">PRIVACY</a>
-                <a href="#">TERMS</a>
-                <a href="#">SUPPORT</a>
-                <a href="#">API</a>
+            <div class="ft-card">
+              <div class="bmi-gauge-wrap">
+                <div class="bmi-gauge" aria-hidden="true">
+                  <svg viewBox="0 0 220 120">
+                    <path d="M 20 100 A 90 90 0 0 1 200 100" fill="none" stroke="#e2e8f0" stroke-width="14" stroke-linecap="round" />
+                    <path id="bmi-arc" d="M 20 100 A 90 90 0 0 1 200 100" fill="none" stroke="url(#bmiGrad)" stroke-width="14" stroke-linecap="round" stroke-dasharray="0 400" />
+                    <defs>
+                      <linearGradient id="bmiGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#22c55e" />
+                        <stop offset="35%" stop-color="#3b82f6" />
+                        <stop offset="70%" stop-color="#f59e0b" />
+                        <stop offset="100%" stop-color="#ef4444" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+                <div class="bmi-readout">
+                  <div class="val" id="bmi-val">—</div>
+                  <div class="cat" id="bmi-cat">Enter values</div>
+                </div>
+              </div>
+              <div id="bmi-tips" class="ft-grid ft-grid-2" style="gap: 12px; margin-top: var(--space-4)"></div>
             </div>
-        </footer>
-
-    </main>
-
-</div>
-
-<script src="../js/BMI.js"></script>
-</body>
+          </div>
+        </main>
+        <div id="app-footer"></div>
+      </div>
+    </div>
+    <script type="module" src="../js/layout.js"></script>
+    <script type="module" src="../js/pages/bmi.js"></script>
+  </body>
 </html>
+

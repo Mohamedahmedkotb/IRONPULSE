@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — Ironpulse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="../styles/global.css" />
+  </head>
+  <body data-shell="dashboard" data-page="home" data-auth-required="true">
+    <div class="app-shell">
+      <aside class="app-sidebar" id="app-sidebar" aria-label="Sidebar"></aside>
+      <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+      <div class="app-main-wrap">
+        <header class="app-topbar">
+          <button type="button" class="app-topbar__menu" id="sidebar-toggle" aria-label="Open navigation" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div id="app-navbar" class="ft-flex" style="flex: 1; min-width: 0"></div>
+        </header>
+        <main class="app-main ft-page-enter" id="page-main">
+          <section class="dash-hero ft-animate-in">
+            <div class="dash-hero-inner">
+              <span class="tag">DASHBOARD</span>
+              <h1>Train Smarter. Track Everything.</h1>
+              <p>Precision metrics for elite performance. Your kinetic journey starts here.</p>
+              <div class="ft-flex" style="flex-wrap: wrap">
+                <a href="workoutlogger.html" class="ft-btn ft-btn--primary ft-btn--lg ft-btn--ripple">Begin workout <i class="fas fa-arrow-right"></i></a>
+                <a href="routinebuilder.html" class="ft-btn ft-btn--secondary ft-btn--lg">Build routine</a>
+              </div>
+            </div>
+          </section>
+
+          <div class="dash-stats">
+            <article class="dash-stat-card ft-animate-in ft-animate-in-delay-1">
+              <div class="label"><i class="fas fa-chart-column"></i> Total workouts</div>
+              <div class="num" data-counter="142">0</div>
+              <div class="sub"><span class="positive">+12%</span> this month</div>
+            </article>
+            <article class="dash-stat-card ft-animate-in ft-animate-in-delay-2">
+              <div class="label"><i class="fas fa-fire"></i> Current streak</div>
+              <div class="num"><span data-counter="14">0</span> <span style="font-size: 1rem; font-weight: 600">days</span></div>
+              <div class="sub">Personal best: 21 days</div>
+            </article>
+            <article class="dash-stat-card ft-animate-in ft-animate-in-delay-3">
+              <div class="label"><i class="fas fa-trophy"></i> Active programs</div>
+              <div class="num" data-counter="3">0</div>
+              <div class="sub">Resume anytime from Programs</div>
+            </article>
+          </div>
+
+          <div class="dash-grid">
+            <div>
+              <div class="ft-flex-between" style="margin-bottom: var(--space-4)">
+                <h2 class="ft-section-title">Volume trend</h2>
+                <span class="ft-muted">Last 7 sessions</span>
+              </div>
+              <div class="ft-card dash-chart-card ft-animate-in">
+                <canvas id="chart-home-line" width="800" height="220" aria-label="Volume chart"></canvas>
+              </div>
+
+              <div class="ft-flex-between" style="margin: var(--space-6) 0 var(--space-4)">
+                <h2 class="ft-section-title">Active programs</h2>
+                <a href="routinebuilder.html" class="ft-btn ft-btn--ghost ft-btn--sm">View all <i class="fas fa-chevron-right"></i></a>
+              </div>
+              <div class="dash-programs">
+                <article class="program-tile">
+                  <div class="bg" style="background-image: url(https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80)"></div>
+                  <div class="scrim"></div>
+                  <div class="body">
+                    <span class="badge" style="background: rgba(239, 68, 68, 0.85); margin-bottom: 8px; display: inline-block">Strength</span>
+                    <h3>Power building</h3>
+                    <p style="opacity: 0.85; font-size: 0.875rem">Week 4 of 8</p>
+                    <div class="bar"><span style="width: 50%"></span></div>
+                    <a href="workoutlogger.html" class="ft-btn ft-btn--primary ft-btn--sm" style="margin-top: 12px">Resume</a>
+                  </div>
+                </article>
+                <article class="program-tile">
+                  <div class="bg" style="background-image: url(https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&q=80)"></div>
+                  <div class="scrim"></div>
+                  <div class="body">
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.85); margin-bottom: 8px; display: inline-block">Bodyweight</span>
+                    <h3>Calisthenics base</h3>
+                    <p style="opacity: 0.85; font-size: 0.875rem">Week 2 of 6</p>
+                    <div class="bar"><span style="width: 33%"></span></div>
+                    <a href="workoutlogger.html" class="ft-btn ft-btn--primary ft-btn--sm" style="margin-top: 12px">Resume</a>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <aside class="ft-card ft-animate-in">
+              <h2 class="ft-section-title" style="margin-bottom: var(--space-4)">Recent activity</h2>
+              <ul class="activity-list">
+                <li>
+                  <div class="activity-ico blue"><i class="fas fa-dumbbell"></i></div>
+                  <div>
+                    <div class="ft-flex-between" style="margin: 0; align-items: flex-start">
+                      <strong>Heavy legs day</strong>
+                      <span class="ft-muted" style="font-size: 0.75rem">Today</span>
+                    </div>
+                    <p class="ft-muted" style="font-size: 0.85rem; margin: 4px 0">Squats, leg press, lunges</p>
+                    <span class="ft-pill is-active" style="cursor: default; font-size: 0.7rem">1h 15m</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="activity-ico green"><i class="fas fa-person-running"></i></div>
+                  <div>
+                    <div class="ft-flex-between" style="margin: 0; align-items: flex-start">
+                      <strong>Recovery run</strong>
+                      <span class="ft-muted" style="font-size: 0.75rem">Yesterday</span>
+                    </div>
+                    <p class="ft-muted" style="font-size: 0.85rem; margin: 4px 0">Zone 2 cardio</p>
+                    <span class="ft-pill is-active" style="cursor: default; font-size: 0.7rem">45m</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="activity-ico purple"><i class="fas fa-spa"></i></div>
+                  <div>
+                    <div class="ft-flex-between" style="margin: 0; align-items: flex-start">
+                      <strong>Mobility flow</strong>
+                      <span class="ft-muted" style="font-size: 0.75rem">2d ago</span>
+                    </div>
+                    <p class="ft-muted" style="font-size: 0.85rem; margin: 4px 0">Hips & shoulders</p>
+                    <span class="ft-pill is-active" style="cursor: default; font-size: 0.7rem">20m</span>
+                  </div>
+                </li>
+              </ul>
+              <a href="workoutlogger.html" class="ft-btn ft-btn--secondary ft-btn--block ft-btn--sm" style="margin-top: var(--space-4)">Full history</a>
+            </aside>
+          </div>
+        </main>
+        <div id="app-footer"></div>
+      </div>
+    </div>
+    <script type="module" src="../js/layout.js"></script>
+    <script type="module" src="../js/pages/home.js"></script>
+  </body>
+</html>
+

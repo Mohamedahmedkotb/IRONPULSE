@@ -1,118 +1,101 @@
 <!DOCTYPE html>
-
 <html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Workout Logger - IRONPULSE</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="../styles/workoutlogger.css" rel="stylesheet"/>
-<link href="../styles/sidebar.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="../styles/global.css" rel="stylesheet"/></head>
-<body>
-<div class="app-container">
-<app-sidebar></app-sidebar>
-<main class="main-content">
-<header class="workout-header">
-<button class="cancel-btn">
-<i class="fa-solid fa-xmark"></i> Cancel Workout
-        </button>
-<h1 class="workout-title">Upper Body Power</h1>
-<button class="save-btn">Save Draft</button>
-</header>
-<main class="workout-container">
-<!-- Top Dashboard Section -->
-<div class="top-dashboard">
-<!-- Progress Card -->
-<div class="progress-card fade-in-up">
-<div class="progress-ring-container">
-<svg class="progress-ring" height="160" width="160">
-<circle class="progress-ring__circle-bg" cx="80" cy="80" fill="transparent" r="70" stroke="#e2e8f0" stroke-width="12"></circle>
-<circle class="progress-ring__circle" cx="80" cy="80" fill="transparent" r="70" stroke="#3b82f6" stroke-width="12"></circle>
-</svg>
-<div class="time-display">
-<span class="time" id="elapsed-time"></span>
-<span class="label">ELAPSED</span>
-</div>
-</div>
-<div class="progress-info">
-<h2>Workout in Progress</h2>
-<p>Keep pushing. You're tracking ahead of your last session.</p>
-<div class="controls">
-<button class="control-btn pause-btn" id="pause-btn">
-<i class="fa-solid fa-pause"></i>
-</button>
-<button class="control-btn add-btn">
-<i class="fa-solid fa-plus"></i>
-</button>
-</div>
-</div>
-</div>
-<!-- Stats Sidebar -->
-<div class="stats-sidebar">
-<div class="stat-card fade-in-up delay-1">
-<div class="stat-header">
-<span class="stat-title">ACTIVE CALORIES</span>
-<i class="fa-solid fa-fire text-orange"></i>
-</div>
-<div class="stat-value">
-<span class="number text-orange">342</span>
-<span class="unit">kcal</span>
-</div>
-<div class="progress-bar-container">
-<div class="progress-bar orange-bar"></div>
-</div>
-</div>
-<div class="stat-card fade-in-up delay-2">
-<div class="stat-header">
-<span class="stat-title">AVG HEART RATE</span>
-<i class="fa-solid fa-heart text-blue"></i>
-</div>
-<div class="stat-value">
-<span class="number">128</span>
-<span class="unit">bpm</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Exercise Log Card -->
-<div class="exercise-log-card fade-in-up delay-3">
-<div class="log-header">
-<div>
-<h2>Exercise Log</h2>
-<p class="subtitle">3 exercises completed â€¢ 2 remaining</p>
-</div>
-<button class="add-exercise-btn">
-<i class="fa-solid fa-plus"> <a href="./Exerciselibrary.html"> </a></i> Add Exercise
-                </button>
-</div>
-<div class="table-responsive">
-<table class="exercise-table">
-<thead>
-<tr>
-<th>SET</th>
-<th>EXERCISE</th>
-<th>WEIGHT (LBS)</th>
-<th>REPS</th>
-<th>STATUS</th>
-</tr>
-</thead>
-<tbody id="exercise-list">
-<!-- Rows populated by JS -->
-</tbody>
-</table>
-</div>
-</div>
-<!-- Finish Button -->
-<div class="finish-container fade-in-up delay-4">
-<button class="finish-workout-btn">Finish Workout</button>
-</div>
-</main>
-<script src="../js/workoutlogger.js"></script>
-</main>
-</div>
-<script src="../js/sidebar.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workout log — Ironpulse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="../styles/global.css" />
+  </head>
+  <body data-shell="dashboard" data-page="logger" data-auth-required="true">
+    <div class="app-shell">
+      <aside class="app-sidebar" id="app-sidebar"></aside>
+      <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+      <div class="app-main-wrap">
+        <header class="app-topbar">
+          <button type="button" class="app-topbar__menu" id="sidebar-toggle" aria-label="Open navigation"><i class="fas fa-bars"></i></button>
+          <div id="app-navbar" class="ft-flex" style="flex: 1; min-width: 0"></div>
+        </header>
+        <main class="app-main ft-page-enter">
+          <h1 class="ft-section-title" style="font-size: 1.75rem; margin-bottom: 8px">Workout logger</h1>
+          <p class="ft-muted" style="margin-bottom: var(--space-5)">Live session + saved history (local storage).</p>
+
+          <div class="logger-top">
+            <div class="logger-timer ft-card">
+              <div>
+                <p class="ft-muted" style="font-size: 0.75rem; margin: 0 0 4px">Session timer</p>
+                <div class="time" id="wl-time">00:00</div>
+                <div class="ft-flex" style="margin-top: 12px">
+                  <button type="button" class="ft-btn ft-btn--secondary ft-btn--sm" id="wl-pause"><i class="fas fa-pause"></i> Pause</button>
+                  <button type="button" class="ft-btn ft-btn--ghost ft-btn--sm" id="wl-reset">Reset</button>
+                </div>
+              </div>
+              <div class="ft-muted" style="font-size: 0.9rem">
+                <p style="margin: 0 0 8px"><i class="fas fa-fire" style="color: #f97316"></i> Est. kcal: <strong id="wl-kcal">312</strong></p>
+                <p style="margin: 0"><i class="fas fa-heart-pulse" style="color: #ef4444"></i> HR: <strong id="wl-hr">118</strong> bpm</p>
+              </div>
+            </div>
+            <div class="ft-card">
+              <h3 class="ft-section-title" style="font-size: 1rem">Quick log</h3>
+              <p class="ft-muted" style="font-size: 0.85rem">Bench day — editable sets below.</p>
+            </div>
+          </div>
+
+          <div class="ft-flex-between" style="margin-bottom: var(--space-4); flex-wrap: wrap; gap: 12px">
+            <div class="ft-flex" style="flex-wrap: wrap; gap: 10px">
+              <input type="search" class="ft-input" id="wl-search" placeholder="Search workouts…" style="max-width: 260px" />
+              <select class="ft-input" id="wl-filter" style="max-width: 180px">
+                <option value="all">All types</option>
+                <option value="Push">Push</option>
+                <option value="Pull">Pull</option>
+                <option value="Legs">Legs</option>
+                <option value="Cardio">Cardio</option>
+              </select>
+            </div>
+            <button type="button" class="ft-btn ft-btn--primary" id="wl-add"><i class="fas fa-plus"></i> Log workout</button>
+          </div>
+
+          <div class="logger-table-wrap">
+            <table class="logger-table" aria-label="Workout history">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Duration</th>
+                  <th>Notes</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="wl-rows"></tbody>
+            </table>
+          </div>
+
+          <div class="ft-card" style="margin-top: var(--space-5)">
+            <h3 class="ft-section-title" style="font-size: 1rem; margin-bottom: var(--space-4)">Active sets</h3>
+            <table class="logger-table">
+              <thead>
+                <tr>
+                  <th>Set</th>
+                  <th>Exercise</th>
+                  <th>Weight</th>
+                  <th>Reps</th>
+                  <th>Done</th>
+                </tr>
+              </thead>
+              <tbody id="wl-sets"></tbody>
+            </table>
+            <button type="button" class="ft-btn ft-btn--primary ft-btn--block ft-btn--lg" style="margin-top: var(--space-5)" id="wl-finish">Finish workout</button>
+          </div>
+        </main>
+        <div id="app-footer"></div>
+      </div>
+    </div>
+    <script type="module" src="../js/layout.js"></script>
+    <script type="module" src="../js/pages/workoutlogger.js"></script>
+  </body>
 </html>
+

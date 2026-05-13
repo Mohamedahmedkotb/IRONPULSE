@@ -1,73 +1,48 @@
 <!DOCTYPE html>
-
 <html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="../styles/Exerciselibrary.css" rel="stylesheet"/>
-<title>Document</title>
-<link href="../styles/sidebar.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="../styles/global.css" rel="stylesheet"/></head>
-<body>
-<div class="app-container">
-<app-sidebar></app-sidebar>
-<main class="main-content">
-<div class="main">
-    <div class="herosection">
- <div class="text0">       
-    <p class="text1"> Exercise Library </p>
-    <p class="text2"> Master your movements, Browse 500+ precision-tracked exercises  </p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise library — Ironpulse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="../styles/global.css" />
+  </head>
+  <body data-shell="dashboard" data-page="library" data-auth-required="true">
+    <div class="app-shell">
+      <aside class="app-sidebar" id="app-sidebar"></aside>
+      <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+      <div class="app-main-wrap">
+        <header class="app-topbar">
+          <button type="button" class="app-topbar__menu" id="sidebar-toggle" aria-label="Open navigation"><i class="fas fa-bars"></i></button>
+          <div id="app-navbar" class="ft-flex" style="flex: 1; min-width: 0"></div>
+        </header>
+        <main class="app-main ft-page-enter">
+          <div class="ft-flex-between" style="margin-bottom: var(--space-5); flex-wrap: wrap; gap: 16px">
+            <div>
+              <h1 class="ft-section-title" style="font-size: 1.75rem">Exercise library</h1>
+              <p class="ft-muted">Search, filter, and preview movement patterns.</p>
+            </div>
+            <button type="button" class="ft-btn ft-btn--primary" id="lib-add-custom"><i class="fas fa-plus"></i> Custom exercise</button>
+          </div>
+          <div class="ft-card" style="margin-bottom: var(--space-5)">
+            <div class="ft-flex" style="flex-wrap: wrap; gap: 12px; align-items: center">
+              <div class="ft-input-wrap" style="flex: 1; min-width: 220px">
+                <i class="fas fa-search"></i>
+                <input type="search" class="ft-input" id="lib-search" placeholder="Search exercises…" />
+              </div>
+              <div class="ft-pills" id="lib-cats"></div>
+            </div>
+          </div>
+          <div class="card-grid" id="lib-grid"></div>
+        </main>
+        <div id="app-footer"></div>
+      </div>
     </div>
-</div>
-<div class="form">
-<form>
-<div class="searchexercise">
-<input class="search-bar" placeholder="Search exercises,muscles, or equipment... " type="text"/>
-</div>
-<div class="filters">
-<button class="filter-btn">Chest</button>
-<button class="filter-btn">Back</button>
-<button class="filter-btn">Legs</button>
-<button class="filter-btn">Core</button>
-<button class="more-filters-btn">more-filters</button>
-</div>
-<div class="Exercises">
-<div class="Bench-press">
-<h2 class="card-titleb">Barbell Bench Press</h2>
-<img src="../assets/media/bench_press.png"/>
-<div class="tags">
-<span class="tag">Push</span>
-<span class="tag">Compound</span>
-</div>
-</div>
-<div class="squats">
-<h2 class="card-titles"> Squats</h2>
-<img src="../assets/media/squats.png"/>
-<div class="tags">
-<span class="tag">Push</span>
-<span class="tag">Compound</span>
-</div>
-</div>
-<div class="bodyweight">
-<h2 class="card-titleBW"> Ring Muscle Up</h2>
-<img src="../assets/media/muscle_up.png"/>
-<div class="tags">
-<span class="tag">Pull/Push</span>
-<span class="tag">Calisthenics</span>
-</div>
-</div>
-</div>
-</form></div>
-
-<div class="btn">
-<button class="btn-load-more">Load More Exercises</button>
-</div>
-</div>
-</main></div>
-<script src="../js/Exerciselibrary.js"></script>
-
-
-<script src="../js/sidebar.js"></script>
-</body>
+    <script type="module" src="../js/layout.js"></script>
+    <script type="module" src="../js/pages/library.js"></script>
+  </body>
 </html>
+

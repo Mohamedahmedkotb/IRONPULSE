@@ -1,0 +1,2 @@
+backend/uploads/avatars/*
+!backend/uploads/avatars/.gitkeep

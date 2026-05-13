@@ -1,0 +1,9 @@
+Options -Indexes
+<IfModule mod_rewrite.c>
+  RewriteEngine Off
+</IfModule>
+
+# Block PHP execution inside uploads (defense in depth with non-PHP extensions)
+<DirectoryMatch "^/.*/uploads/">
+  php_flag engine off
+</DirectoryMatch>
