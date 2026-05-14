@@ -1,0 +1,6 @@
+# IronPulse — PHP template app (XAMPP)
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+</IfModule>

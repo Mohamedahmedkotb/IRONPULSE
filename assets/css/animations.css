@@ -1,0 +1,89 @@
+/* Ironpulse — motion (subtle, purposeful) */
+@keyframes ft-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ft-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ft-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes ft-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes ft-ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes ft-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ft-animate-in {
+  animation: ft-fade-up 0.5s var(--transition-base) both;
+}
+
+.ft-animate-in-delay-1 {
+  animation-delay: 0.08s;
+}
+.ft-animate-in-delay-2 {
+  animation-delay: 0.16s;
+}
+.ft-animate-in-delay-3 {
+  animation-delay: 0.24s;
+}
+
+.ft-page-enter {
+  animation: ft-fade-in 0.35s ease both;
+}
+
+.ft-skeleton {
+  background: linear-gradient(90deg, #e2e8f0 0%, #f1f5f9 50%, #e2e8f0 100%);
+  background-size: 200% 100%;
+  animation: ft-shimmer 1.2s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ft-animate-in,
+  .ft-animate-in-delay-1,
+  .ft-animate-in-delay-2,
+  .ft-animate-in-delay-3,
+  .ft-page-enter,
+  .ft-skeleton {
+    animation: none !important;
+  }
+}
