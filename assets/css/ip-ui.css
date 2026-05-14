@@ -1,0 +1,506 @@
+/* IronPulse — premium UI layer (layout polish, theme, marketing sections) */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* —— Top bar (enhanced) —— */
+.app-topbar {
+  min-height: var(--topbar-height);
+  height: auto;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  gap: 0;
+  background: var(--topbar-bg);
+  border-bottom: 1px solid var(--topbar-border);
+  box-shadow: var(--topbar-shadow);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.app-topbar__primary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: var(--topbar-height);
+  padding: 0 var(--space-5);
+}
+
+.app-topbar__cluster {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+  min-width: 0;
+}
+
+.app-topbar__links {
+  display: none;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.app-topbar__links a {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.app-topbar__links a:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.app-topbar__links a.is-active {
+  color: var(--accent-600);
+  background: var(--accent-soft);
+}
+
+.app-topbar__search {
+  flex: 1;
+  max-width: 400px;
+}
+
+.app-topbar__search input {
+  background: var(--surface);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-xs);
+}
+
+.app-topbar__end {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.ip-theme-toggle {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.ip-theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.ip-theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.ip-theme-toggle .ip-icon-light {
+  display: none;
+}
+
+html[data-theme="dark"] .ip-theme-toggle .ip-icon-light {
+  display: block;
+}
+
+html[data-theme="dark"] .ip-theme-toggle .ip-icon-dark {
+  display: none;
+}
+
+.app-topbar__breadcrumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5) var(--space-3);
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--topbar-divider);
+  background: var(--topbar-sub-bg);
+}
+
+.app-topbar__breadcrumbs a {
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.app-topbar__breadcrumbs a:hover {
+  color: var(--accent);
+}
+
+.app-topbar__breadcrumbs [aria-current="page"] {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.app-topbar__sep {
+  opacity: 0.45;
+  user-select: none;
+}
+
+@media (min-width: 900px) {
+  .app-topbar__links {
+    display: flex;
+  }
+}
+
+@media (max-width: 1024px) {
+  .app-topbar__links {
+    display: none;
+  }
+}
+
+/* —— Flash toasts (PHP) —— */
+.ip-toast {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 9999;
+  max-width: min(360px, calc(100vw - 2rem));
+  padding: 0.9rem 1.15rem;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  box-shadow: var(--shadow-lg);
+  animation: ft-fade-up 0.4s ease both;
+}
+
+.ip-toast--error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+.ip-toast--ok {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+}
+
+html[data-theme="dark"] .ip-toast--error {
+  background: rgba(127, 29, 29, 0.35);
+  border: 1px solid rgba(248, 113, 113, 0.45);
+  color: #fecaca;
+}
+
+html[data-theme="dark"] .ip-toast--ok {
+  background: rgba(6, 78, 59, 0.4);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  color: #a7f3d0;
+}
+
+/* —— Page chrome —— */
+.ip-page-head {
+  margin-bottom: var(--space-6);
+}
+
+.ip-page-head h1 {
+  font-size: clamp(1.5rem, 2.5vw, 1.85rem);
+  letter-spacing: -0.03em;
+}
+
+/* —— Feature grid (dashboard / landing sections) —— */
+.ip-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+}
+
+@media (max-width: 900px) {
+  .ip-features {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ip-feature-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.ip-feature-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.ip-feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(59, 130, 246, 0.25);
+}
+
+.ip-feature-card:hover::before {
+  opacity: 1;
+}
+
+.ip-feature-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: grid;
+  place-items: center;
+  font-size: 1.15rem;
+  margin-bottom: var(--space-4);
+  background: var(--accent-soft);
+  color: var(--accent-600);
+}
+
+.ip-feature-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: var(--space-2);
+  color: var(--text-primary);
+}
+
+.ip-feature-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* —— Testimonials —— */
+.ip-testimonials {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+}
+
+@media (max-width: 768px) {
+  .ip-testimonials {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ip-quote {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.ip-quote::before {
+  content: "\201C";
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-5);
+  font-size: 3rem;
+  line-height: 1;
+  font-family: Georgia, serif;
+  color: var(--accent);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.ip-quote blockquote {
+  margin: 0 0 var(--space-4);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  font-style: normal;
+}
+
+.ip-quote figcaption {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ip-quote figcaption span {
+  display: block;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+/* —— Section titles —— */
+.ip-section-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2);
+}
+
+.ip-section-lead {
+  margin: 0 0 var(--space-5);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  max-width: 560px;
+}
+
+/* —— Footer (expanded) —— */
+.app-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    "brand product account"
+    "copy copy copy";
+  gap: var(--space-5) var(--space-6);
+  padding: var(--space-7) var(--space-6) var(--space-5);
+  align-items: start;
+}
+
+.app-footer__brand {
+  grid-area: brand;
+}
+
+.app-footer__product {
+  grid-area: product;
+}
+
+.app-footer__account {
+  grid-area: account;
+}
+
+.app-footer__copy {
+  grid-area: copy;
+}
+
+.app-footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.app-footer__col h4 {
+  margin: 0 0 var(--space-2);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sidebar-text);
+  opacity: 0.85;
+}
+
+.app-footer__col a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--sidebar-text);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.app-footer__col a:hover {
+  color: #fff;
+}
+
+.app-footer__social {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.app-footer__social a {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--sidebar-text-active);
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.app-footer__social a:hover {
+  background: rgba(59, 130, 246, 0.25);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .app-footer {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "brand"
+      "product"
+      "account"
+      "copy";
+    text-align: center;
+  }
+
+  .app-footer__brand {
+    justify-content: center;
+  }
+
+  .app-footer__social {
+    justify-content: center;
+  }
+
+  .app-footer__col {
+    align-items: center;
+  }
+}
+
+/* —— Form hints (client validation) —— */
+.ft-field-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: var(--space-1);
+}
+
+/* —— Buttons: secondary loading ring —— */
+.ft-btn--secondary.ft-btn--loading::after,
+.ft-btn--ghost.ft-btn--loading::after {
+  border-color: rgba(15, 23, 42, 0.2);
+  border-top-color: var(--accent);
+}
+
+html[data-theme="dark"] .ft-btn--secondary.ft-btn--loading::after,
+html[data-theme="dark"] .ft-btn--ghost.ft-btn--loading::after {
+  border-color: rgba(255, 255, 255, 0.15);
+  border-top-color: #93c5fd;
+}
+
+html[data-theme="dark"] .app-main table thead tr {
+  background: var(--surface-elevated);
+}
+
+.app-main a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}

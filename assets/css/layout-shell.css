@@ -212,15 +212,14 @@
   position: sticky;
   top: 0;
   z-index: var(--z-topbar);
-  height: var(--topbar-height);
   display: flex;
   align-items: center;
   gap: var(--space-4);
   padding: 0 var(--space-5);
-  background: rgba(244, 247, 254, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
+  background: var(--topbar-bg, rgba(244, 247, 254, 0.85));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--topbar-border, var(--border));
 }
 
 .app-topbar__logo-link {
@@ -323,20 +322,11 @@
 
 .app-footer {
   margin-top: auto;
-  padding: var(--space-6) var(--space-6) var(--space-5);
   border-top: 1px solid var(--sidebar-border);
   background: var(--sidebar-bg);
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-areas:
-    "brand nav"
-    "copy copy";
-  gap: var(--space-4) var(--space-6);
-  align-items: center;
 }
 
 .app-footer__brand {
-  grid-area: brand;
   display: flex;
   align-items: center;
   gap: var(--space-4);
@@ -369,56 +359,15 @@
   line-height: 1.4;
 }
 
-.app-footer__nav {
-  grid-area: nav;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--space-2) var(--space-5);
-}
-
-.app-footer__nav a {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--sidebar-text);
-  text-decoration: none;
-}
-
-.app-footer__nav a:hover {
-  color: var(--sidebar-accent);
-}
-
 .app-footer__copy {
-  grid-area: copy;
   margin: 0;
   padding-top: var(--space-4);
   border-top: 1px solid var(--sidebar-border);
   font-size: 0.75rem;
   color: var(--sidebar-text);
   text-align: center;
-  grid-column: 1 / -1;
 }
 
-@media (max-width: 720px) {
-  .app-footer {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "brand"
-      "nav"
-      "copy";
-    text-align: center;
-  }
-
-  .app-footer__brand {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .app-footer__nav {
-    justify-content: center;
-  }
-}
 @media (max-width: 1024px) {
   .app-sidebar {
     transform: translateX(-100%);

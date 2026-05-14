@@ -39,5 +39,6 @@ try {
     ip_redirect('pages/workouts.php');
 }
 
-ip_flash_set('success', 'Workout added.');
-ip_redirect('pages/workouts.php');
+$newId = (int) $pdo->lastInsertId();
+ip_flash_set('success', 'Workout added. Attach exercises from the library or below.');
+ip_redirect($newId > 0 ? 'pages/workouts.php?edit=' . $newId : 'pages/workouts.php');

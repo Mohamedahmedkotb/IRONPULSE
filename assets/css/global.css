@@ -4,6 +4,7 @@
 @import "./layout-shell.css";
 @import "./auth.css";
 @import "./pages.css";
+@import "./ip-ui.css";
 
 *,
 *::before,
@@ -120,6 +121,14 @@ h4 {
 .ft-card:hover {
   box-shadow: var(--shadow-md);
   border-color: rgba(59, 130, 246, 0.2);
+}
+
+.ft-surface {
+  background: var(--surface);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .ft-card--glass {

@@ -6,6 +6,7 @@ declare(strict_types=1);
 $authJsModules = $authJsModules ?? ['login'];
 ?>
 <div id="app-footer"></div>
+<script defer src="<?= ip_h(ip_url('assets/js/ip-app.js')) ?>"></script>
 <script type="module" src="<?= ip_h(ip_url('assets/js/layout.js')) ?>"></script>
 <?php foreach ($authJsModules as $mod): ?>
 <script type="module" src="<?= ip_h(ip_url('assets/js/pages/' . $mod . '.js')) ?>"></script>

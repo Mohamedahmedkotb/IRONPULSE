@@ -445,3 +445,49 @@ body[data-page="signup"] [data-auth-signup] {
   border-color: var(--accent);
   color: var(--accent-600);
 }
+
+.auth-header-nav .ip-theme-toggle--auth {
+  width: 40px;
+  height: 40px;
+}
+
+html[data-theme="dark"] body.auth-page {
+  background: var(--page-bg);
+  color: var(--text-primary);
+}
+
+html[data-theme="dark"] body.auth-page .auth-shell,
+html[data-theme="dark"] body.auth-page .auth-panel {
+  background: var(--page-bg);
+}
+
+html[data-theme="dark"] body.auth-page .auth-header {
+  background: var(--surface);
+  border-bottom-color: var(--border);
+}
+
+html[data-theme="dark"] body.auth-page .auth-header-wordmark {
+  color: var(--text-primary);
+}
+
+html[data-theme="dark"] body.auth-page .auth-card {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: var(--shadow-md);
+}
+
+html[data-theme="dark"] body.auth-page .auth-card h2 {
+  color: var(--text-primary);
+}
+
+html[data-theme="dark"] body.auth-page .ft-input {
+  background: var(--surface-elevated);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+html[data-theme="dark"] body.auth-page .auth-social button {
+  background: var(--surface-elevated);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}

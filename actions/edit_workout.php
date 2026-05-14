@@ -44,4 +44,4 @@ $up->execute([
 ]);
 
 ip_flash_set('success', $up->rowCount() ? 'Workout updated.' : 'No changes.');
-ip_redirect('pages/workouts.php');
+ip_redirect('pages/workouts.php?edit=' . $id);

@@ -1,12 +1,15 @@
 <?php
+declare(strict_types=1);
+
 $err = ip_flash_get('error');
 $ok = ip_flash_get('success');
+$u = static fn (string $p): string => ip_url($p);
 ?>
 <?php if ($err): ?>
-    <div class="ip-toast ip-toast--error ft-animate-in" role="alert" style="position:fixed;top:1.25rem;right:1.25rem;z-index:9999;padding:0.85rem 1.2rem;border-radius:var(--radius-md);background:#fef2f2;border:1px solid #fecaca;color:#991b1b;max-width:320px;box-shadow:var(--shadow-lg);"><?= ip_h($err) ?></div>
+    <div class="ip-toast ip-toast--error ft-animate-in" role="alert"><?= ip_h($err) ?></div>
 <?php endif; ?>
 <?php if ($ok): ?>
-    <div class="ip-toast ip-toast--ok ft-animate-in" role="status" style="position:fixed;top:1.25rem;right:1.25rem;z-index:9999;padding:0.85rem 1.2rem;border-radius:var(--radius-md);background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;max-width:320px;box-shadow:var(--shadow-lg);"><?= ip_h($ok) ?></div>
+    <div class="ip-toast ip-toast--ok ft-animate-in" role="status"><?= ip_h($ok) ?></div>
 <?php endif; ?>
 
 <div id="app-footer">
@@ -16,15 +19,31 @@ $ok = ip_flash_get('success');
             <div>
                 <strong class="app-footer__name">IronPulse</strong>
                 <p class="app-footer__tagline">Train smarter. Track everything.</p>
+                <div class="app-footer__social" aria-label="Social">
+                    <a href="#" aria-label="Instagram (demo)"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="YouTube (demo)"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="Strava (demo)"><i class="fab fa-strava" aria-hidden="true"></i></a>
+                </div>
             </div>
         </div>
-        <nav class="app-footer__nav" aria-label="Footer">
-            <a href="<?= ip_h(ip_url('pages/dashboard.php')) ?>">Dashboard</a>
-            <a href="<?= ip_h(ip_url('pages/profile.php')) ?>">Profile</a>
-        </nav>
-        <p class="app-footer__copy">© <?= (int) date('Y') ?> IronPulse. PHP template mode.</p>
+        <div class="app-footer__product app-footer__col">
+            <h4>Product</h4>
+            <a href="<?= ip_h($u('pages/dashboard.php')) ?>">Dashboard</a>
+            <a href="<?= ip_h($u('pages/workouts.php')) ?>">Workouts</a>
+            <a href="<?= ip_h($u('pages/routines.php')) ?>">Routines</a>
+            <a href="<?= ip_h($u('pages/exercises.php')) ?>">Exercise library</a>
+        </div>
+        <div class="app-footer__account app-footer__col">
+            <h4>Account</h4>
+            <a href="<?= ip_h($u('pages/profile.php')) ?>">Profile</a>
+            <a href="<?= ip_h($u('pages/settings.php')) ?>">Settings</a>
+            <a href="<?= ip_h($u('pages/coaches.php')) ?>">Coaches</a>
+            <a href="<?= ip_h($u('pages/meals.php')) ?>">Meal plans</a>
+        </div>
+        <p class="app-footer__copy">© <?= (int) date('Y') ?> IronPulse. Built for consistent training.</p>
     </footer>
 </div>
 </div>
 </div>
+<script defer src="<?= ip_h(ip_url('assets/js/ip-app.js')) ?>"></script>
 <?php require __DIR__ . '/scripts.php'; ?>

@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 /**
- * Include from endpoints: require_once dirname(__DIR__, 2) . '/bootstrap.php';
- * (api/*/*.php is two levels below /backend)
+ * Include from endpoints: require_once dirname(__DIR__) . '/bootstrap.php';
+ * (api routes are inside the backend directory)
  */
 $IRONPULSE_ROOT = __DIR__;
 

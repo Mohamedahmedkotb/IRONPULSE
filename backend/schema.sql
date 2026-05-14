@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS notifications;
 DROP TABLE IF EXISTS bookings;
 DROP TABLE IF EXISTS routine_exercises;
 DROP TABLE IF EXISTS routines;
+DROP TABLE IF EXISTS workout_exercises;
 DROP TABLE IF EXISTS workouts;
 DROP TABLE IF EXISTS meal_plans;
 DROP TABLE IF EXISTS progress_logs;
@@ -87,6 +88,23 @@ CREATE TABLE workouts (
   PRIMARY KEY (id),
   KEY idx_workouts_user_date (user_id, workout_date),
   CONSTRAINT fk_workouts_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE workout_exercises (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  workout_id INT UNSIGNED NOT NULL,
+  exercise_id INT UNSIGNED NOT NULL,
+  sort_order SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+  sets SMALLINT UNSIGNED NOT NULL DEFAULT 3,
+  reps SMALLINT UNSIGNED NOT NULL DEFAULT 10,
+  weight_kg DECIMAL(7,2) NULL,
+  rest_seconds SMALLINT UNSIGNED NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_workout_exercise (workout_id, exercise_id),
+  KEY idx_we_workout (workout_id),
+  KEY idx_we_exercise (exercise_id),
+  CONSTRAINT fk_we_workout FOREIGN KEY (workout_id) REFERENCES workouts (id) ON DELETE CASCADE,
+  CONSTRAINT fk_we_exercise FOREIGN KEY (exercise_id) REFERENCES exercises (id) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE routines (

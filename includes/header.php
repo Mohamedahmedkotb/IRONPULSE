@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <script>
+    (function(){try{var t=localStorage.getItem('ip-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= ip_h($pageTitle ?? 'IronPulse') ?> — IronPulse</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +17,7 @@
         'login' => ip_url('pages/login.php'),
         'signup' => ip_url('pages/signup.php'),
         'dashboard' => ip_url('pages/dashboard.php'),
+        'exercises' => ip_url('pages/exercises.php'),
     ], JSON_THROW_ON_ERROR) ?>;
     </script>
 </head>

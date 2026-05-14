@@ -10,6 +10,9 @@ $authPage = $authPage ?? 'login';
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <script>
+    (function(){try{var t=localStorage.getItem('ip-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= ip_h($pageTitle ?? 'Account') ?> — Ironpulse</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +25,8 @@ $authPage = $authPage ?? 'login';
         'login' => ip_url('pages/login.php'),
         'signup' => ip_url('pages/signup.php'),
         'dashboard' => ip_url('pages/dashboard.php'),
-    ], JSON_THROW_ON_ERROR) ?>;
+        'exercises' => ip_url('pages/exercises.php'),
+    ], JSON_THROW_ON_ERROR); ?>
     </script>
 </head>
 <body class="auth-page" data-shell="auth" data-page="<?= ip_h($authPage) ?>" data-php-layout="1">
