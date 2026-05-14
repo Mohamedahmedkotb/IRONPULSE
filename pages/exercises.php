@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/includes/init.php';
@@ -53,6 +52,7 @@ $exercises = $st->fetchAll();
 $categories = $pdo->query('SELECT DISTINCT category FROM exercises WHERE category != "" ORDER BY category ASC')->fetchAll(PDO::FETCH_COLUMN);
 $muscles = $pdo->query('SELECT DISTINCT muscle_group FROM exercises WHERE muscle_group != "" ORDER BY muscle_group ASC')->fetchAll(PDO::FETCH_COLUMN);
 
+// Workouts context
 $forWorkout = isset($_GET['for_workout']) ? (int) $_GET['for_workout'] : 0;
 $workoutsSt = $pdo->prepare('SELECT id, title, workout_date FROM workouts WHERE user_id = ? ORDER BY workout_date DESC, id DESC LIMIT 100');
 $workoutsSt->execute([$userId]);
@@ -65,9 +65,23 @@ if ($forWorkout > 0) {
             break;
         }
     }
-    if (!$forWorkoutValid) {
-        $forWorkout = 0;
+    if (!$forWorkoutValid) $forWorkout = 0;
+}
+
+// Routines context
+$forRoutine = isset($_GET['for_routine']) ? (int) $_GET['for_routine'] : 0;
+$routinesSt = $pdo->prepare('SELECT id, title FROM routines WHERE user_id = ? ORDER BY title ASC LIMIT 100');
+$routinesSt->execute([$userId]);
+$routinesList = $routinesSt->fetchAll();
+$forRoutineValid = false;
+if ($forRoutine > 0) {
+    foreach ($routinesList as $rt) {
+        if ((int) $rt['id'] === $forRoutine) {
+            $forRoutineValid = true;
+            break;
+        }
     }
+    if (!$forRoutineValid) $forRoutine = 0;
 }
 
 $pageTitle = 'Exercise library';
@@ -79,7 +93,18 @@ require_once dirname(__DIR__) . '/includes/navbar.php';
 ?>
 <main class="app-main">
     <h1 style="margin-top:0">Exercises</h1>
-    <p class="ft-muted">Search, filter, and preview movement patterns. Add any row to one of your workouts.</p>
+    <p class="ft-muted">Search, filter, and preview movement patterns. Add any row to one of your workouts or routines.</p>
+
+    <?php if ($msg = ip_flash_get('success')): ?>
+        <div style="padding:1rem;background:rgba(16,185,129,0.1);color:#10b981;border:1px solid #10b981;border-radius:var(--radius-md);margin-bottom:var(--space-5)">
+            <i class="fas fa-check-circle" style="margin-right:8px"></i> <?= ip_h($msg) ?>
+        </div>
+    <?php endif; ?>
+    <?php if ($msg = ip_flash_get('error')): ?>
+        <div style="padding:1rem;background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid #ef4444;border-radius:var(--radius-md);margin-bottom:var(--space-5)">
+            <i class="fas fa-exclamation-circle" style="margin-right:8px"></i> <?= ip_h($msg) ?>
+        </div>
+    <?php endif; ?>
 
     <?php if (!$weTableExists): ?>
         <div class="ft-surface" style="margin-top:var(--space-4);padding:var(--space-4);border-radius:var(--radius-lg);border:1px solid #f59e0b;background:rgba(245,158,11,0.08)">
@@ -96,6 +121,12 @@ require_once dirname(__DIR__) . '/includes/navbar.php';
             <span class="ft-muted" style="font-size:0.9rem"> — choose a session below each exercise, set optional sets/reps, then <em>Add</em>. Return to </span>
             <a href="<?= ip_h(ip_url('pages/workouts.php?edit=' . $forWorkout)) ?>">edit workout</a>.
         </div>
+    <?php elseif ($forRoutine > 0): ?>
+        <div class="ft-surface" style="margin-top:var(--space-4);padding:var(--space-4);border-radius:var(--radius-lg);border:1px solid var(--border);background:var(--accent-soft)">
+            <strong>Adding to a routine</strong>
+            <span class="ft-muted" style="font-size:0.9rem"> — choose a routine below each exercise, set optional sets/reps, then <em>Add</em>. Return to </span>
+            <a href="<?= ip_h(ip_url('pages/routines.php?edit=' . $forRoutine)) ?>">edit routine</a>.
+        </div>
     <?php endif; ?>
 
     <div class="ft-surface" style="margin-top:var(--space-5); padding:1.25rem; border-radius:var(--radius-lg); border:1px solid var(--border)">
@@ -103,6 +134,10 @@ require_once dirname(__DIR__) . '/includes/navbar.php';
             <?php if ($forWorkout > 0): ?>
                 <input type="hidden" name="for_workout" value="<?= (int) $forWorkout ?>">
             <?php endif; ?>
+            <?php if ($forRoutine > 0): ?>
+                <input type="hidden" name="for_routine" value="<?= (int) $forRoutine ?>">
+            <?php endif; ?>
+            
             <div style="flex:1; min-width:200px">
                 <label style="display:block; font-size:0.75rem; font-weight:600; margin-bottom:4px; color:var(--text-muted)">SEARCH</label>
                 <input type="text" name="search" value="<?= ip_h($search) ?>" placeholder="e.g. Bench press" style="width:100%; padding:0.5rem 0.75rem; border-radius:var(--radius-md); border:1px solid var(--border); background:var(--page-bg); color:var(--text)">
@@ -127,7 +162,12 @@ require_once dirname(__DIR__) . '/includes/navbar.php';
             </div>
             <button type="submit" class="ft-btn ft-btn--primary" style="height:38px; padding:0 1.25rem">Filter</button>
             <?php if ($search !== '' || $category !== '' || $muscle !== ''): ?>
-                <a href="<?= ip_h(ip_url('pages/exercises.php' . ($forWorkout > 0 ? '?for_workout=' . $forWorkout : ''))) ?>" style="font-size:0.85rem; color:var(--text-muted); text-decoration:none; margin-bottom:10px">Clear</a>
+                <?php 
+                $qs = '';
+                if ($forWorkout > 0) $qs = '?for_workout=' . $forWorkout;
+                if ($forRoutine > 0) $qs = '?for_routine=' . $forRoutine;
+                ?>
+                <a href="<?= ip_h(ip_url('pages/exercises.php' . $qs)) ?>" style="font-size:0.85rem; color:var(--text-muted); text-decoration:none; margin-bottom:10px">Clear</a>
             <?php endif; ?>
         </form>
     </div>
@@ -140,7 +180,9 @@ require_once dirname(__DIR__) . '/includes/navbar.php';
                     <th style="padding:0.75rem 1rem">Category</th>
                     <th style="padding:0.75rem 1rem">Muscle</th>
                     <th style="padding:0.75rem 1rem">Level</th>
-                    <?php if ($weTableExists): ?>
+                    <?php if ($forRoutine > 0): ?>
+                    <th style="padding:0.75rem 1rem;min-width:220px">Add to Routine</th>
+                    <?php elseif ($weTableExists): ?>
                     <th style="padding:0.75rem 1rem;min-width:220px">Add to workout</th>
                     <?php endif; ?>
                 </tr>
@@ -153,7 +195,6 @@ require_once dirname(__DIR__) . '/includes/navbar.php';
                             <?php 
                             $img = (string) $e['image'];
                             if (!empty($img)): 
-                                // Construct URL: if it looks like an Unsplash ID, use Unsplash; otherwise use local assets
                                 $src = (str_contains($img, '/') || str_contains($img, '.')) 
                                     ? ip_url('assets/media/' . $img) 
                                     : "https://images.unsplash.com/{$img}?auto=format&fit=crop&w=600&q=80";
@@ -164,7 +205,31 @@ require_once dirname(__DIR__) . '/includes/navbar.php';
                         <td style="padding:0.6rem 1rem"><?= ip_h((string) $e['category']) ?></td>
                         <td style="padding:0.6rem 1rem"><?= ip_h((string) $e['muscle_group']) ?></td>
                         <td style="padding:0.6rem 1rem"><?= ip_h((string) $e['difficulty']) ?></td>
-                        <?php if ($weTableExists): ?>
+                        
+                        <?php if ($forRoutine > 0): ?>
+                        <td style="padding:0.6rem 1rem;vertical-align:top">
+                            <?php if ($routinesList !== []): ?>
+                                <form method="post" action="<?= ip_h(ip_url('actions/attach_exercise_to_routine.php')) ?>" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+                                    <?= ip_csrf_field() ?>
+                                    <input type="hidden" name="exercise_id" value="<?= (int) $e['id'] ?>">
+                                    <input type="hidden" name="redirect_to" value="pages/exercises.php?for_routine=<?= $forRoutine ?>">
+                                    <select name="routine_id" class="ft-input" style="flex:1;min-width:140px;font-size:0.8rem;padding:0.35rem 0.5rem" required>
+                                        <?php foreach ($routinesList as $rt): ?>
+                                            <option value="<?= (int) $rt['id'] ?>" <?= $forRoutine === (int) $rt['id'] ? 'selected' : '' ?>>
+                                                <?= ip_h(mb_substr((string) $rt['title'], 0, 40)) ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <input type="number" name="sets" value="3" min="1" max="99" title="Sets" class="ft-input" style="width:52px;font-size:0.8rem;padding:0.35rem" aria-label="Sets">
+                                    <span class="ft-muted" style="font-size:0.75rem">×</span>
+                                    <input type="number" name="reps" value="10" min="1" max="999" title="Reps" class="ft-input" style="width:56px;font-size:0.8rem;padding:0.35rem" aria-label="Reps">
+                                    <button type="submit" class="ft-btn ft-btn--primary ft-btn--sm" style="white-space:nowrap">Add</button>
+                                </form>
+                            <?php else: ?>
+                                <span class="ft-muted" style="font-size:0.85rem"><a href="<?= ip_h(ip_url('pages/routines.php')) ?>">Create a routine</a> first.</span>
+                            <?php endif; ?>
+                        </td>
+                        <?php elseif ($weTableExists): ?>
                         <td style="padding:0.6rem 1rem;vertical-align:top">
                             <?php if ($workoutsList !== []): ?>
                                 <form method="post" action="<?= ip_h(ip_url('actions/attach_exercise_to_workout.php')) ?>" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
@@ -191,7 +256,7 @@ require_once dirname(__DIR__) . '/includes/navbar.php';
                 <?php endforeach; ?>
                 <?php if ($exercises === []): ?>
                     <tr>
-                        <td colspan="<?= $weTableExists ? 5 : 4 ?>" style="padding:3rem; text-align:center; color:var(--text-muted)">
+                        <td colspan="<?= ($weTableExists || $forRoutine > 0) ? 5 : 4 ?>" style="padding:3rem; text-align:center; color:var(--text-muted)">
                             <div style="font-size:1.5rem; margin-bottom:0.5rem">🔍</div>
                             No exercises found matching your criteria.
                         </td>

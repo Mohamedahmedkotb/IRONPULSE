@@ -200,6 +200,22 @@ $mkListUrl = static function (array $extra = []) use ($q, $sort, $exFilter, $per
 
     return 'routines.php' . ($qs !== '' ? '?' . $qs : '');
 };
+
+$editExercises = [];
+if ($editRow) {
+    $exSt = $pdo->prepare(
+        'SELECT re.id AS re_id, re.sets, re.reps, e.id AS exercise_id, e.name
+         FROM routine_exercises re
+         INNER JOIN exercises e ON e.id = re.exercise_id
+         WHERE re.routine_id = ?
+         ORDER BY re.sort_order ASC, re.id ASC'
+    );
+    $exSt->execute([(int) $editRow['id']]);
+    $editExercises = $exSt->fetchAll();
+    
+    $allExSt = $pdo->query('SELECT id, name FROM exercises ORDER BY name ASC');
+    $allExercises = $allExSt->fetchAll();
+}
 ?>
 <main class="app-main">
     <div class="ft-flex-between" style="align-items:flex-start;margin-bottom:var(--space-6);flex-wrap:wrap;gap:20px">
@@ -222,17 +238,8 @@ $mkListUrl = static function (array $extra = []) use ($q, $sort, $exFilter, $per
                     <i class="fas fa-dumbbell"></i>
                 </div>
                 <div>
-                    <div style="font-size:0.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase">Exercise slots</div>
+                    <div style="font-size:0.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase">Exercises</div>
                     <div style="font-size:1.1rem;font-weight:700"><?= (int) $stats['total_exercises'] ?></div>
-                </div>
-            </div>
-            <div class="ft-card ft-flex" style="padding:12px 20px;gap:12px;align-items:center;min-width:140px;background:var(--surface)">
-                <div style="width:40px;height:40px;border-radius:50%;background:rgba(249,115,22,0.1);display:flex;align-items:center;justify-content:center;color:#f97316">
-                    <i class="fas fa-chart-simple"></i>
-                </div>
-                <div>
-                    <div style="font-size:0.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase">Avg / routine</div>
-                    <div style="font-size:1.1rem;font-weight:700"><?= ip_h((string) $stats['avg_exercises']) ?></div>
                 </div>
             </div>
         </div>
@@ -261,89 +268,35 @@ $mkListUrl = static function (array $extra = []) use ($q, $sort, $exFilter, $per
                         <label class="ft-label">Search</label>
                         <input type="text" name="q" class="ft-input" style="width:100%" placeholder="e.g. Upper Body..." value="<?= ip_h($q) ?>">
                     </div>
-                    <div style="width:160px">
-                        <label class="ft-label">Exercises</label>
-                        <select name="ex" class="ft-input" style="width:100%">
-                            <option value="all" <?= $exFilter === 'all' ? 'selected' : '' ?>>All routines</option>
-                            <option value="nonempty" <?= $exFilter === 'nonempty' ? 'selected' : '' ?>>With exercises</option>
-                            <option value="empty" <?= $exFilter === 'empty' ? 'selected' : '' ?>>Empty (no exercises)</option>
-                        </select>
-                    </div>
-                    <div style="width:160px">
+                    <div style="width:140px">
                         <label class="ft-label">Sort</label>
                         <select name="sort" class="ft-input" style="width:100%">
-                            <option value="newest" <?= $sort === 'newest' ? 'selected' : '' ?>>Newest first</option>
-                            <option value="oldest" <?= $sort === 'oldest' ? 'selected' : '' ?>>Oldest first</option>
-                            <option value="updated" <?= $sort === 'updated' ? 'selected' : '' ?>>Recently updated</option>
-                            <option value="updated_asc" <?= $sort === 'updated_asc' ? 'selected' : '' ?>>Least recently updated</option>
-                            <option value="ex_desc" <?= $sort === 'ex_desc' ? 'selected' : '' ?>>Most exercises</option>
-                            <option value="ex_asc" <?= $sort === 'ex_asc' ? 'selected' : '' ?>>Fewest exercises</option>
-                            <option value="az" <?= $sort === 'az' ? 'selected' : '' ?>>Title (A–Z)</option>
-                            <option value="za" <?= $sort === 'za' ? 'selected' : '' ?>>Title (Z–A)</option>
+                            <option value="newest" <?= $sort === 'newest' ? 'selected' : '' ?>>Newest First</option>
+                            <option value="oldest" <?= $sort === 'oldest' ? 'selected' : '' ?>>Oldest First</option>
+                            <option value="az" <?= $sort === 'az' ? 'selected' : '' ?>>Title (A-Z)</option>
+                            <option value="za" <?= $sort === 'za' ? 'selected' : '' ?>>Title (Z-A)</option>
                         </select>
                     </div>
-                    <div style="width:100px">
-                        <label class="ft-label">Per page</label>
-                        <select name="pp" class="ft-input" style="width:100%">
-                            <?php foreach ([6, 12, 24, 48] as $n): ?>
-                                <option value="<?= $n ?>" <?= $perPage === $n ? 'selected' : '' ?>><?= $n ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <input type="hidden" name="page" value="1">
                     <button type="submit" class="ft-btn ft-btn--secondary" style="height:42px">Apply</button>
-                    <?php if ($filtersActive): ?>
-                        <a href="<?= ip_h($mkListUrl(['q' => '', 'sort' => 'newest', 'ex' => 'all', 'pp' => 12, 'page' => 1, 'edit' => null])) ?>" class="ft-btn ft-btn--ghost" style="height:42px;display:flex;align-items:center">Reset</a>
+                    <?php if ($q || $sort !== 'newest'): ?>
+                        <a href="routines.php" class="ft-btn ft-btn--ghost" style="height:42px;display:flex;align-items:center">Reset</a>
                     <?php endif; ?>
                 </form>
             </section>
 
-            <?php if ($totalPages > 1): ?>
-                <nav class="ft-surface" style="padding:0.75rem 1rem;border-radius:var(--radius-lg);border:1px solid var(--border);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px" aria-label="Routine pages">
-                    <span class="ft-muted" style="font-size:0.85rem">Page <?= (int) $page ?> of <?= (int) $totalPages ?></span>
-                    <div class="ft-flex" style="gap:8px;flex-wrap:wrap">
-                        <?php if ($page > 1): ?>
-                            <a class="ft-btn ft-btn--ghost" style="padding:6px 12px;font-size:0.85rem" href="<?= ip_h(ip_url('pages/' . $mkListUrl(['page' => $page - 1]))) ?>"><i class="fas fa-chevron-left"></i> Prev</a>
-                        <?php endif; ?>
-                        <?php if ($page < $totalPages): ?>
-                            <a class="ft-btn ft-btn--ghost" style="padding:6px 12px;font-size:0.85rem" href="<?= ip_h(ip_url('pages/' . $mkListUrl(['page' => $page + 1]))) ?>">Next <i class="fas fa-chevron-right"></i></a>
-                        <?php endif; ?>
-                    </div>
-                </nav>
-            <?php endif; ?>
-
             <!-- Routines List -->
             <div class="dash-programs" style="margin-top:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:var(--space-5)">
                 <?php foreach ($routines as $r): ?>
-                    <?php
-                    $exs = $routineExercises[(int) $r['id']] ?? [];
-                    $totalSets = 0;
-                    foreach ($exs as $row) {
-                        $totalSets += (int) $row['sets'];
-                    }
-                    $updatedRaw = (string) ($r['updated_at'] ?? $r['created_at'] ?? '');
-                    $updatedLabel = $updatedRaw !== '' ? date('M j, Y g:i A', strtotime($updatedRaw)) : '';
-                    ?>
                     <article class="program-tile" style="position:relative;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;background:var(--surface);display:flex;flex-direction:column">
                         <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=400&q=70');height:80px"></div>
                         <div class="scrim" style="background:linear-gradient(to bottom, rgba(0,0,0,0.1), var(--surface));height:80px"></div>
-
+                        
                         <div class="body" style="padding:1rem;position:relative;z-index:10;flex:1">
                             <h3 style="margin:0 0 0.5rem 0;font-size:1.1rem;color:var(--text)"><?= ip_h((string) $r['title']) ?></h3>
-                            <div style="display:flex;align-items:center;gap:6px;margin-bottom:0.75rem;flex-wrap:wrap">
+                            <div style="display:flex;align-items:center;gap:6px;margin-bottom:0.75rem">
                                 <span style="background:var(--bg);padding:2px 8px;border-radius:12px;font-size:0.75rem;color:var(--text-muted);font-weight:600">
-                                    <i class="fas fa-dumbbell" style="margin-right:4px;font-size:0.7rem"></i><?= (int) $r['exercise_count'] ?> exercises
+                                    <i class="fas fa-dumbbell" style="margin-right:4px;font-size:0.7rem"></i><?= (int) $r['exercise_count'] ?> Exercises
                                 </span>
-                                <?php if ($totalSets > 0): ?>
-                                    <span style="background:var(--bg);padding:2px 8px;border-radius:12px;font-size:0.75rem;color:var(--text-muted);font-weight:600" title="Sum of set counts across the routine">
-                                        <i class="fas fa-layer-group" style="margin-right:4px;font-size:0.7rem"></i><?= (int) $totalSets ?> sets
-                                    </span>
-                                <?php endif; ?>
-                                <?php if ($updatedLabel !== ''): ?>
-                                    <span style="background:var(--bg);padding:2px 8px;border-radius:12px;font-size:0.75rem;color:var(--text-muted);font-weight:600">
-                                        <i class="fas fa-clock" style="margin-right:4px;font-size:0.7rem"></i><?= ip_h($updatedLabel) ?>
-                                    </span>
-                                <?php endif; ?>
                             </div>
                             <?php if ($r['description']): ?>
                                 <p style="margin:0 0 1rem 0;font-size:0.85rem;color:var(--text-muted);line-height:1.4">
@@ -352,50 +305,53 @@ $mkListUrl = static function (array $extra = []) use ($q, $sort, $exFilter, $per
                             <?php endif; ?>
 
                             <!-- Exercise Preview -->
-                            <?php if ($exs !== []): ?>
-                                <details style="background:var(--bg);border-radius:var(--radius-md);padding:0.75rem;font-size:0.8rem;border:1px solid var(--border)">
-                                    <summary style="cursor:pointer;font-weight:600;color:var(--text);list-style:none;display:flex;align-items:center;gap:8px">
-                                        <i class="fas fa-chevron-down" style="font-size:0.7rem;transition:transform 0.15s"></i>
-                                        Exercise list (<?= count($exs) ?>)
-                                    </summary>
-                                    <ul style="margin:0.75rem 0 0;padding-left:1.2rem;color:var(--text-muted)">
-                                        <?php foreach ($exs as $ex): ?>
+                            <?php if (!empty($routineExercises[$r['id']])): ?>
+                                <div style="background:var(--bg);border-radius:var(--radius-md);padding:0.75rem;font-size:0.8rem">
+                                    <ul style="margin:0;padding-left:1.2rem;color:var(--text-muted)">
+                                        <?php 
+                                        $exs = $routineExercises[$r['id']];
+                                        $previewCount = 3;
+                                        for ($i = 0; $i < min(count($exs), $previewCount); $i++): 
+                                        ?>
                                             <li style="margin-bottom:4px">
-                                                <strong><?= ip_h((string) $ex['name']) ?></strong>
-                                                <span style="opacity:0.7">(<?= (int) $ex['sets'] ?>×<?= (int) $ex['reps'] ?>)</span>
+                                                <strong><?= ip_h($exs[$i]['name']) ?></strong> 
+                                                <span style="opacity:0.7">(<?= (int)$exs[$i]['sets'] ?>x<?= (int)$exs[$i]['reps'] ?>)</span>
                                             </li>
-                                        <?php endforeach; ?>
+                                        <?php endfor; ?>
+                                        <?php if (count($exs) > $previewCount): ?>
+                                            <li style="list-style:none;font-size:0.75rem;margin-top:4px;opacity:0.8">+ <?= count($exs) - $previewCount ?> more</li>
+                                        <?php endif; ?>
                                     </ul>
-                                </details>
+                                </div>
                             <?php else: ?>
                                 <div style="background:var(--bg);border-radius:var(--radius-md);padding:0.75rem;font-size:0.8rem;color:var(--text-muted);text-align:center;border:1px dashed var(--border)">
                                     No exercises added yet.
                                 </div>
                             <?php endif; ?>
                         </div>
-
+                        
                         <!-- Actions Footer -->
-                        <div style="padding:0.75rem 1rem;background:var(--bg);border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
+                        <div style="padding:0.75rem 1rem;background:var(--bg);border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px">
                             <form method="post" action="<?= ip_h(ip_url('actions/duplicate_routine.php')) ?>" style="display:inline">
                                 <?= ip_csrf_field() ?>
                                 <input type="hidden" name="id" value="<?= (int) $r['id'] ?>">
-                                <button type="submit" class="ft-btn ft-btn--ghost" style="padding:4px 12px;font-size:0.8rem" title="Duplicate routine"><i class="fas fa-copy"></i> Duplicate</button>
+                                <button type="submit" class="ft-btn ft-btn--ghost" style="padding:4px 12px;font-size:0.8rem" title="Duplicate Routine"><i class="fas fa-copy"></i> Duplicate</button>
                             </form>
-                            <a href="<?= ip_h(ip_url('pages/' . $mkListUrl(['edit' => (int) $r['id'], 'page' => 1]))) ?>" class="ft-btn ft-btn--ghost" style="padding:4px 12px;font-size:0.8rem" title="Edit routine"><i class="fas fa-edit"></i> Edit</a>
+                            <a href="<?= ip_h(ip_url('pages/routines.php?edit=' . (int) $r['id'])) ?>" class="ft-btn ft-btn--ghost" style="padding:4px 12px;font-size:0.8rem" title="Edit Routine"><i class="fas fa-edit"></i> Edit</a>
                             <form method="post" action="<?= ip_h(ip_url('actions/delete_routine.php')) ?>" style="display:inline" onsubmit="return confirm('Delete this routine? All associated exercises will be unlinked.');">
                                 <?= ip_csrf_field() ?>
                                 <input type="hidden" name="id" value="<?= (int) $r['id'] ?>">
-                                <button type="submit" class="ft-btn ft-btn--ghost" style="padding:4px 12px;font-size:0.8rem;color:var(--danger)" title="Delete routine"><i class="fas fa-trash"></i></button>
+                                <button type="submit" class="ft-btn ft-btn--ghost" style="padding:4px 12px;font-size:0.8rem;color:var(--danger)" title="Delete Routine"><i class="fas fa-trash"></i></button>
                             </form>
                         </div>
                     </article>
                 <?php endforeach; ?>
-
+                
                 <?php if (!$routines): ?>
                     <div style="grid-column:1/-1;padding:4rem 2rem;text-align:center;background:var(--surface);border:1px dashed var(--border);border-radius:var(--radius-lg)">
                         <div style="font-size:2.5rem;margin-bottom:1rem;color:var(--text-muted)">📋</div>
-                        <h3 style="margin:0 0 0.5rem 0">No routines found</h3>
-                        <p class="ft-muted" style="margin:0">Try adjusting search or filters, or create a new routine.</p>
+                        <h3 style="margin:0 0 0.5rem 0">No Routines Found</h3>
+                        <p class="ft-muted" style="margin:0">Create a new routine to start organizing your workouts.</p>
                     </div>
                 <?php endif; ?>
             </div>
@@ -405,7 +361,76 @@ $mkListUrl = static function (array $extra = []) use ($q, $sort, $exFilter, $per
         <div style="display:grid;gap:var(--space-6)">
             <?php if ($editRow): ?>
                 <section class="ft-surface" style="padding:var(--space-5);border-radius:var(--radius-lg);border:1px solid var(--border);position:sticky;top:20px">
-                    <h2 style="margin-top:0;font-size:1.1rem">Edit routine</h2>
+                    <h2 style="margin-top:0;font-size:1.1rem">Edit Routine</h2>
+                    
+                    <p class="ft-muted" style="margin:0 0 var(--space-4);font-size:0.9rem">
+                        <a href="<?= ip_h(ip_url('pages/exercises.php?for_routine=' . (int) $editRow['id'])) ?>">Open exercise library</a>
+                        to attach movements to this routine.
+                    </p>
+                    
+                    <?php if ($editExercises !== []): ?>
+                        <div style="margin-bottom:var(--space-5);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden">
+                            <table style="width:100%;border-collapse:collapse;font-size:0.85rem">
+                                <thead>
+                                    <tr style="background:var(--page-bg);text-align:left">
+                                        <th style="padding:0.6rem 0.75rem">Exercise</th>
+                                        <th style="padding:0.6rem 0.75rem">Sets × reps</th>
+                                        <th style="padding:0.6rem 0.75rem;text-align:right">Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($editExercises as $we): ?>
+                                        <tr style="border-top:1px solid var(--border)">
+                                            <td style="padding:0.6rem 0.75rem;font-weight:600"><?= ip_h((string) $we['name']) ?></td>
+                                            <td style="padding:0.6rem 0.75rem"><?= (int) $we['sets'] ?> × <?= (int) $we['reps'] ?></td>
+                                            <td style="padding:0.6rem 0.75rem;text-align:right">
+                                                <form method="post" action="<?= ip_h(ip_url('actions/remove_routine_exercise.php')) ?>" style="display:inline" onsubmit="return confirm('Remove this exercise from the routine?');">
+                                                    <?= ip_csrf_field() ?>
+                                                    <input type="hidden" name="routine_id" value="<?= (int) $editRow['id'] ?>">
+                                                    <input type="hidden" name="re_id" value="<?= (int) $we['re_id'] ?>">
+                                                    <button type="submit" class="ft-btn ft-btn--ghost" style="padding:2px 8px;font-size:0.8rem;color:var(--danger)" title="Remove exercise"><i class="fas fa-times"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php else: ?>
+                        <p class="ft-muted" style="margin:0 0 var(--space-4);font-size:0.875rem">No exercises linked yet.</p>
+                    <?php endif; ?>
+
+                    <!-- Quick Add Exercise Form -->
+                    <div style="background:var(--bg);padding:1rem;border-radius:var(--radius-md);border:1px solid var(--border);margin-bottom:var(--space-5)">
+                        <form method="post" action="<?= ip_h(ip_url('actions/attach_exercise_to_routine.php')) ?>" style="display:flex;flex-direction:column;gap:10px">
+                            <?= ip_csrf_field() ?>
+                            <input type="hidden" name="routine_id" value="<?= (int) $editRow['id'] ?>">
+                            <input type="hidden" name="redirect_to" value="pages/routines.php?edit=<?= (int) $editRow['id'] ?>">
+                            <div>
+                                <label class="ft-label" style="font-size:0.75rem;margin-bottom:4px">Quick Add Exercise</label>
+                                <select name="exercise_id" class="ft-input" style="width:100%;font-size:0.85rem" required>
+                                    <option value="" disabled selected>Select an exercise...</option>
+                                    <?php foreach ($allExercises as $ex): ?>
+                                        <option value="<?= (int) $ex['id'] ?>"><?= ip_h($ex['name']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div style="display:flex;gap:10px;align-items:flex-end">
+                                <div style="flex:1">
+                                    <label class="ft-label" style="font-size:0.75rem;margin-bottom:4px">Sets</label>
+                                    <input type="number" name="sets" value="3" min="1" max="99" class="ft-input" style="width:100%;font-size:0.85rem">
+                                </div>
+                                <div style="flex:1">
+                                    <label class="ft-label" style="font-size:0.75rem;margin-bottom:4px">Reps</label>
+                                    <input type="number" name="reps" value="10" min="1" max="999" class="ft-input" style="width:100%;font-size:0.85rem">
+                                </div>
+                                <button type="submit" class="ft-btn ft-btn--secondary" style="padding:0 1rem;height:38px;white-space:nowrap">Add</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <hr style="border:0;border-top:1px solid var(--border);margin:var(--space-5) 0">
+
                     <form method="post" action="<?= ip_h(ip_url('actions/edit_routine.php')) ?>">
                         <?= ip_csrf_field() ?>
                         <input type="hidden" name="id" value="<?= (int) $editRow['id'] ?>">
@@ -420,14 +445,14 @@ $mkListUrl = static function (array $extra = []) use ($q, $sort, $exFilter, $per
                             </div>
                         </div>
                         <div style="margin-top:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:10px">
-                            <button type="submit" class="ft-btn ft-btn--primary">Save changes</button>
-                            <a class="ft-btn ft-btn--secondary" style="text-align:center" href="<?= ip_h(ip_url('pages/' . $mkListUrl(['edit' => null]))) ?>">Cancel</a>
+                            <button type="submit" class="ft-btn ft-btn--primary">Save Changes</button>
+                            <a class="ft-btn ft-btn--secondary" style="text-align:center" href="<?= ip_h(ip_url('pages/routines.php')) ?>">Cancel</a>
                         </div>
                     </form>
                 </section>
             <?php else: ?>
                 <section class="ft-surface" style="padding:var(--space-5);border-radius:var(--radius-lg);border:1px solid var(--border);position:sticky;top:20px">
-                    <h2 style="margin-top:0;font-size:1.1rem">Create routine</h2>
+                    <h2 style="margin-top:0;font-size:1.1rem">Create Routine</h2>
                     <form method="post" action="<?= ip_h(ip_url('actions/add_routine.php')) ?>">
                         <?= ip_csrf_field() ?>
                         <div style="display:grid;gap:1rem">
@@ -440,7 +465,7 @@ $mkListUrl = static function (array $extra = []) use ($q, $sort, $exFilter, $per
                                 <textarea class="ft-input" style="width:100%;min-height:120px" name="description" placeholder="Describe the focus or schedule for this routine..."></textarea>
                             </div>
                         </div>
-                        <button type="submit" class="ft-btn ft-btn--primary" style="margin-top:1.5rem;width:100%">Create routine</button>
+                        <button type="submit" class="ft-btn ft-btn--primary" style="margin-top:1.5rem;width:100%">Create Routine</button>
                     </form>
                 </section>
             <?php endif; ?>
